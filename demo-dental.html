@@ -679,6 +679,16 @@ function startLead(reason, prefillNeed){
   if (prefillNeed) leadFlow.prefillNeed = prefillNeed;
   inputEl.focus();
 }
+function mergeNeed(prefill, typed){
+  // The visitor often just retypes their original question at the need
+  // step — never show the owner the same text twice ("X — X").
+  if (!prefill) return typed;
+  const a = prefill.trim().toLowerCase(), b = typed.trim().toLowerCase();
+  if (/^(that'?s it|thats it|it|ok|okay|yes)$/i.test(typed) || a === b) return prefill;
+  if (a.includes(b)) return prefill;
+  if (b.includes(a)) return typed;
+  return prefill + " — " + typed;
+}
 function leadStep(text){
   const t = text.trim();
   if (/^(cancel|stop|never mind|nevermind|quit)$/i.test(t)){
@@ -709,10 +719,7 @@ function leadStep(text){
     return;
   }
   if (leadFlow.step === "need"){
-    let need = t;
-    if (leadFlow.prefillNeed && /^(that'?s it|thats it|it|ok|okay|yes)$/i.test(t)) need = leadFlow.prefillNeed;
-    else if (leadFlow.prefillNeed) need = leadFlow.prefillNeed + " — " + t;
-    leadFlow.need = need;
+    leadFlow.need = mergeNeed(leadFlow.prefillNeed, t);
     finishLead();
     return;
   }
