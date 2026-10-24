@@ -249,7 +249,7 @@
 /* Demo AI receptionist — rule-based intent matching over a fixed knowledge
    base. In a paid client build, the single getAnswer() swap point below is
    where an LLM endpoint would be called instead. */
-const CONFIG = {"name": "Magnolia & Main Salon", "phone": "(386) 555-0162", "contactName": "Dana", "leadKey": "mms_demo_leads", "hours": {"0": null, "1": null, "2": [9, 19], "3": [9, 19], "4": [9, 19], "5": [9, 19], "6": [9, 16]}, "kb": [{"id": "hours", "phrases": ["what are your hours", "your hours", "when are you open", "opening hours", "hours of operation", "how late", "what time do you close", "when do you close"], "keywords": ["hours", "open", "close", "closed", "late", "early"], "answer": "We're open Tuesday through Friday 9\u20137, and Saturday 9\u20134. We're closed Sundays and Mondays."}, {"id": "location", "phrases": ["where are you located", "where are you", "your address", "how do i get there", "directions", "parking"], "keywords": ["located", "address", "parking", "directions", "find you"], "answer": "We're at 214 N Ohio Ave in Live Oak. Free parking behind the building, and the entrance on Ohio Ave is step-free."}, {"id": "phone", "phrases": ["phone number", "your number", "call you", "contact you"], "keywords": ["phone", "number", "call", "contact", "reach"], "answer": "You can reach the salon at (386) 555-0162 during business hours \u2014 or just leave your number here and we'll call you."}, {"id": "weekend", "phrases": ["open on weekends", "weekend", "on saturday", "on sunday", "saturdays", "sundays", "open monday", "on monday"], "keywords": ["weekend", "saturday", "sunday", "monday"], "answer": "Saturdays we're open 9\u20134 but appointment-only, and they book out fast. We're closed Sundays and Mondays \u2014 leave a message here and you'll be first in the callback queue Tuesday morning."}, {"id": "womens-cut", "phrases": ["women's cut", "womens cut", "women s cut", "women cut", "ladies cut", "how much is a cut", "cut price"], "keywords": ["women", "ladies"], "answer": "Women's cuts start at $45, including a wash and style \u2014 about an hour. Bring inspiration photos if you have them; they help more than descriptions."}, {"id": "mens-cut", "phrases": ["men's cut", "mens cut", "men s cut", "men cut", "haircut for men", "fade", "buzz cut"], "keywords": ["men", "fade", "buzz"], "answer": "Men's cuts start at $25 with Cole, including a hot-lather neckline \u2014 usually about 30 minutes. Walk-ins welcome Tuesday through Friday."}, {"id": "kids-cut", "phrases": ["kids cut", "kids' cut", "children cut", "child cut", "cut for my son", "cut for my daughter"], "keywords": ["kids", "children", "child", "son", "daughter"], "answer": "Kids' cuts (12 and under) start at $20, and we're patient with nervous little ones \u2014 plus a lollipop at the end, which has never once failed."}, {"id": "color", "phrases": ["color", "hair color", "dye my hair", "all-over color", "full color", "color price"], "keywords": ["color", "dye", "colour"], "answer": "All-over color starts at $65, and consultations are always free \u2014 we'll talk through what you want and quote it exactly before we start. For color, come with unwashed hair if you can; it takes color better."}, {"id": "highlights", "phrases": ["highlights", "highlight", "foils", "partial highlights", "full highlights"], "keywords": ["highlight", "highlights", "foils"], "answer": "Highlights start at $95, partial or full, toned to your taste. Allow about two hours \u2014 and ask about a deep conditioning add-on for $30 if your hair is dry."}, {"id": "balayage", "phrases": ["balayage", "bayalage", "hand-painted", "ombre"], "keywords": ["balayage", "ombre"], "answer": "Balayage starts at $120 with Sofia. It's hand-painted and low-maintenance \u2014 most clients go longer between appointments than with foils. Free consultation first, always."}, {"id": "beard", "phrases": ["beard trim", "beard", "beard shaping", "beard cut"], "keywords": ["beard"], "answer": "Beard trims are $15 with Cole \u2014 shape-up, hot towel, and a beard oil finish. About 20 minutes, walk-ins welcome."}, {"id": "bridal", "phrases": ["bridal", "wedding hair", "wedding party", "bridesmaid", "updo", "formal styling"], "keywords": ["bridal", "wedding", "updo", "formal", "party"], "answer": "Yes \u2014 bridal styling starts at $85, and we take whole parties. Book early for weddings; Saturdays fill weeks ahead. Leave your date here and Dana will call you to plan it."}, {"id": "walk-ins", "phrases": ["walk-ins", "walk in", "do i need an appointment", "appointment needed"], "keywords": ["walk", "appointment"], "answer": "Walk-ins are welcome Tuesday through Friday. Saturdays are appointment-only and book out fast \u2014 if Saturday is your only day, book ahead."}, {"id": "book", "phrases": ["how do i book", "how to book", "book an appointment", "make an appointment", "schedule", "book me in"], "keywords": ["book", "booking", "appointment", "schedule"], "answer": "Easy \u2014 just tell me your name, your phone number, and what you'd like, and Dana will call you to confirm a time. Want to do that now?"}, {"id": "cancel", "phrases": ["reschedule", "cancel", "change my appointment", "move my appointment"], "keywords": ["reschedule", "cancel", "change"], "answer": "No problem \u2014 call us at (386) 555-0162, or leave a message here with your new preferred time. We just ask for 24 hours' notice when you can, since Saturdays book out."}, {"id": "patch-test", "phrases": ["patch test", "allergy test", "sensitive scalp", "sensitive skin"], "keywords": ["patch", "sensitive", "allergy"], "answer": "For color, we offer a free patch test 48 hours before your appointment \u2014 especially important if you've ever reacted to color before. Mention it when you book and we'll set it up."}, {"id": "products", "phrases": ["what products", "products you use", "shampoo", "retail", "buy products"], "keywords": ["products", "shampoo", "retail"], "answer": "We use professional salon products, and most of them are available to buy at the front desk. If you love what we used on your hair, just ask and we'll point you to it."}, {"id": "gift-cards", "phrases": ["gift card", "gift cards", "gift certificate"], "keywords": ["gift", "certificate"], "answer": "Yes \u2014 gift cards in any amount, available at the front desk. They make a suspiciously good birthday present."}, {"id": "payment", "phrases": ["payment", "credit card", "forms of payment", "how can i pay", "do you take cards"], "keywords": ["pay", "payment", "card", "cash"], "answer": "Cash and all major credit and debit cards. We don't take personal checks."}, {"id": "parking", "phrases": ["parking", "where do i park"], "keywords": ["park", "parking"], "answer": "Free parking behind the building, and the Ohio Ave entrance is step-free."}, {"id": "first-visit", "phrases": ["first visit", "what should i bring", "bring to", "first time"], "keywords": ["bring", "first", "visit"], "answer": "Just yourself \u2014 and inspiration photos if you have them. For color, unwashed hair takes color better, so skip the wash that morning if you can."}, {"id": "event-tomorrow", "phrases": ["big event tomorrow", "event tomorrow", "wedding tomorrow", "prom tomorrow", "date tonight"], "keywords": ["tomorrow", "event", "wedding", "prom", "tonight"], "answer": "We keep a squeeze-in list for exactly this. Leave your name, number, and what you need, and we'll call you the moment a chair opens \u2014 and we'll be honest if we truly can't fit you in."}, {"id": "bad-color", "phrases": ["color went wrong", "color went orange", "went orange", "my color is orange", "brassy", "botched", "ruined my hair"], "keywords": ["orange", "brassy", "botched", "ruined", "wrong"], "answer": "Don't try to fix it at home with another box \u2014 that usually makes it harder to correct. Leave your details here and Sofia will call you to book a free correction consultation; she'll tell you honestly what can be done."}, {"id": "reaction", "phrases": ["reaction", "itchy scalp", "rash", "burning scalp", "allergic reaction"], "keywords": ["itch", "itchy", "rash", "burn", "reaction", "allergic", "swell"], "answer": "Rinse the product out with cool water and stop using it. If you have swelling, trouble breathing, or the irritation is spreading, seek medical care right away rather than waiting. Otherwise leave your details here and we'll call you to talk through what happened."}], "quickReplies": [{"label": "\ud83d\udcc5 Book an appointment", "kind": "book"}, {"label": "\ud83d\udd50 Hours & location", "kind": "hours"}, {"label": "\ud83d\udc87 Services & prices", "kind": "services"}, {"label": "\ud83c\udfa8 Color & bridal", "kind": "kb", "target": "color"}, {"label": "\ud83d\udc87\u200d\u2640\ufe0f Hair emergency", "kind": "urgent"}], "urgentMenu": [{"label": "\ud83c\udf89 Big event tomorrow", "id": "event-tomorrow", "pattern": "tomorrow|event|wedding|prom|date tonight|big day|tonight"}, {"label": "\ud83d\ude1f Color went wrong", "id": "bad-color", "pattern": "color went wrong|orange|brassy|botched|dyed|ruined"}, {"label": "\u26a0\ufe0f Reaction / irritation", "id": "reaction", "pattern": "itch|itchy|rash|burn|reaction|allergic|swell"}], "urgentIds": ["event-tomorrow", "bad-color", "reaction"], "bookOfferIds": ["book"], "servicesSummary": "Here's what we do, with starting-at pricing: women's cuts from $45 \u00b7 men's cuts from $25 \u00b7 kids' cuts from $20 \u00b7 all-over color from $65 \u00b7 highlights from $95 \u00b7 balayage from $120 \u00b7 beard trims $15 \u00b7 bridal styling from $85 \u00b7 deep conditioning $30. Color consultations are always free.", "greetingHint": "I can answer questions about hours, services, and prices, or help you book an appointment. What can I do for you?", "urgentIntro": "Big day coming up, or something gone wrong? Let's sort it fast. What's going on?", "messageOfferIds": [], "team": [{"initials": "DW", "name": "Dana Whitfield", "role": "Owner & Master Stylist. Dana opened the salon after fifteen years behind the chair and still takes appointments herself."}, {"initials": "CB", "name": "Cole Bennett", "role": "Barber. Fades, classic cuts, and beard work \u2014 and the fastest chair in town on a Saturday."}, {"initials": "SR", "name": "Sofia Reyes", "role": "Color Specialist. Balayage, corrections, and vivid color \u2014 Sofia's consultations are free and famously honest."}]};
+const CONFIG = {"name": "Magnolia & Main Salon", "phone": "(386) 555-0162", "contactName": "Dana", "leadKey": "mms_demo_leads", "hours": {"0": null, "1": null, "2": [9, 19], "3": [9, 19], "4": [9, 19], "5": [9, 19], "6": [9, 16]}, "kb": [{"id": "hours", "phrases": ["what are your hours", "your hours", "when are you open", "opening hours", "hours of operation", "how late", "what time do you close", "when do you close"], "keywords": ["hours", "open", "close", "closed", "late", "early"], "answer": "We're open Tuesday through Friday 9\u20137, and Saturday 9\u20134. We're closed Sundays and Mondays."}, {"id": "location", "phrases": ["where are you located", "where are you", "your address", "how do i get there", "directions", "parking"], "keywords": ["located", "address", "parking", "directions", "find you"], "answer": "We're at 214 N Ohio Ave in Live Oak. Free parking behind the building, and the entrance on Ohio Ave is step-free."}, {"id": "phone", "phrases": ["phone number", "your number", "call you", "contact you"], "keywords": ["phone", "number", "call", "contact", "reach"], "answer": "You can reach the salon at (386) 555-0162 during business hours \u2014 or just leave your number here and we'll call you."}, {"id": "weekend", "phrases": ["open on weekends", "weekend", "on saturday", "on sunday", "saturdays", "sundays", "open monday", "on monday"], "keywords": ["weekend", "saturday", "sunday", "monday"], "answer": "Saturdays we're open 9\u20134 but appointment-only, and they book out fast. We're closed Sundays and Mondays \u2014 leave a message here and you'll be first in the callback queue Tuesday morning."}, {"id": "womens-cut", "phrases": ["women's cut", "womens cut", "women s cut", "women cut", "ladies cut", "how much is a cut", "cut price"], "keywords": ["women", "ladies"], "answer": "Women's cuts start at $45, including a wash and style \u2014 about an hour. Bring inspiration photos if you have them; they help more than descriptions."}, {"id": "mens-cut", "phrases": ["men's cut", "mens cut", "men s cut", "men cut", "haircut for men", "fade", "buzz cut"], "keywords": ["men", "fade", "buzz"], "answer": "Men's cuts start at $25 with Cole, including a hot-lather neckline \u2014 usually about 30 minutes. Walk-ins welcome Tuesday through Friday."}, {"id": "kids-cut", "phrases": ["kids cut", "kids' cut", "children cut", "child cut", "cut for my son", "cut for my daughter"], "keywords": ["kids", "children", "child", "son", "daughter"], "answer": "Kids' cuts (12 and under) start at $20, and we're patient with nervous little ones \u2014 plus a lollipop at the end, which has never once failed."}, {"id": "color", "phrases": ["color", "hair color", "dye my hair", "all-over color", "full color", "color price"], "keywords": ["color", "dye", "colour"], "answer": "All-over color starts at $65, and consultations are always free \u2014 we'll talk through what you want and quote it exactly before we start. For color, come with unwashed hair if you can; it takes color better."}, {"id": "highlights", "phrases": ["highlights", "highlight", "foils", "partial highlights", "full highlights"], "keywords": ["highlight", "highlights", "foils"], "answer": "Highlights start at $95, partial or full, toned to your taste. Allow about two hours \u2014 and ask about a deep conditioning add-on for $30 if your hair is dry."}, {"id": "balayage", "phrases": ["balayage", "bayalage", "hand-painted", "ombre"], "keywords": ["balayage", "ombre"], "answer": "Balayage starts at $120 with Sofia. It's hand-painted and low-maintenance \u2014 most clients go longer between appointments than with foils. Free consultation first, always."}, {"id": "beard", "phrases": ["beard trim", "beard", "beard shaping", "beard cut"], "keywords": ["beard"], "answer": "Beard trims are $15 with Cole \u2014 shape-up, hot towel, and a beard oil finish. About 20 minutes, walk-ins welcome."}, {"id": "bridal", "phrases": ["bridal", "wedding hair", "wedding party", "bridesmaid", "updo", "formal styling"], "keywords": ["bridal", "wedding", "updo", "formal", "party"], "answer": "Yes \u2014 bridal styling starts at $85, and we take whole parties. Book early for weddings; Saturdays fill weeks ahead. Leave your date here and Dana will call you to plan it."}, {"id": "walk-ins", "phrases": ["walk-ins", "walk in", "do i need an appointment", "appointment needed"], "keywords": ["walk", "appointment"], "answer": "Walk-ins are welcome Tuesday through Friday. Saturdays are appointment-only and book out fast \u2014 if Saturday is your only day, book ahead."}, {"id": "book", "phrases": ["how do i book", "how to book", "book an appointment", "make an appointment", "schedule", "book me in"], "keywords": ["book", "booking", "appointment", "schedule"], "answer": "Easy \u2014 just tell me your name, your phone number, and what you'd like, and Dana will call you to confirm a time. Want to do that now?"}, {"id": "cancel", "phrases": ["reschedule", "cancel", "change my appointment", "move my appointment"], "keywords": ["reschedule", "cancel", "change"], "answer": "No problem \u2014 call us at (386) 555-0162, or leave a message here with your new preferred time. We just ask for 24 hours' notice when you can, since Saturdays book out."}, {"id": "patch-test", "phrases": ["patch test", "allergy test", "sensitive scalp", "sensitive skin"], "keywords": ["patch", "sensitive", "allergy"], "answer": "For color, we offer a free patch test 48 hours before your appointment \u2014 especially important if you've ever reacted to color before. Mention it when you book and we'll set it up."}, {"id": "products", "phrases": ["what products", "products you use", "shampoo", "retail", "buy products"], "keywords": ["products", "shampoo", "retail"], "answer": "We use professional salon products, and most of them are available to buy at the front desk. If you love what we used on your hair, just ask and we'll point you to it."}, {"id": "gift-cards", "phrases": ["gift card", "gift cards", "gift certificate"], "keywords": ["gift", "certificate"], "answer": "Yes \u2014 gift cards in any amount, available at the front desk. They make a suspiciously good birthday present."}, {"id": "payment", "phrases": ["payment", "credit card", "forms of payment", "how can i pay", "do you take cards", "pay with", "pay by"], "keywords": ["pay", "payment", "card", "cash"], "answer": "Cash and all major credit and debit cards. We don't take personal checks."}, {"id": "parking", "phrases": ["parking", "where do i park"], "keywords": ["park", "parking"], "answer": "Free parking behind the building, and the Ohio Ave entrance is step-free."}, {"id": "first-visit", "phrases": ["first visit", "what should i bring", "bring to", "first time"], "keywords": ["bring", "first", "visit"], "answer": "Just yourself \u2014 and inspiration photos if you have them. For color, unwashed hair takes color better, so skip the wash that morning if you can."}, {"id": "event-tomorrow", "phrases": ["big event tomorrow", "event tomorrow", "wedding tomorrow", "prom tomorrow", "date tonight"], "keywords": ["tomorrow", "event", "wedding", "prom", "tonight"], "answer": "We keep a squeeze-in list for exactly this. Leave your name, number, and what you need, and we'll call you the moment a chair opens \u2014 and we'll be honest if we truly can't fit you in."}, {"id": "bad-color", "phrases": ["color went wrong", "color went orange", "went orange", "my color is orange", "brassy", "botched", "ruined my hair"], "keywords": ["orange", "brassy", "botched", "ruined", "wrong"], "answer": "Don't try to fix it at home with another box \u2014 that usually makes it harder to correct. Leave your details here and Sofia will call you to book a free correction consultation; she'll tell you honestly what can be done."}, {"id": "reaction", "phrases": ["reaction", "itchy scalp", "rash", "burning scalp", "allergic reaction"], "keywords": ["itch", "itchy", "rash", "burn", "reaction", "allergic", "swell"], "answer": "Rinse the product out with cool water and stop using it. If you have swelling, trouble breathing, or the irritation is spreading, seek medical care right away rather than waiting. Otherwise leave your details here and we'll call you to talk through what happened."}], "quickReplies": [{"label": "\ud83d\udcc5 Book an appointment", "kind": "book"}, {"label": "\ud83d\udd50 Hours & location", "kind": "hours"}, {"label": "\ud83d\udc87 Services & prices", "kind": "services"}, {"label": "\ud83c\udfa8 Color & bridal", "kind": "kb", "target": "color"}, {"label": "\ud83d\udc87\u200d\u2640\ufe0f Hair emergency", "kind": "urgent"}], "urgentMenu": [{"label": "\ud83c\udf89 Big event tomorrow", "id": "event-tomorrow", "pattern": "tomorrow|event|wedding|prom|date tonight|big day|tonight"}, {"label": "\ud83d\ude1f Color went wrong", "id": "bad-color", "pattern": "color went wrong|orange|brassy|botched|dyed|ruined"}, {"label": "\u26a0\ufe0f Reaction / irritation", "id": "reaction", "pattern": "itch|itchy|rash|burn|reaction|allergic|swell"}], "urgentIds": ["event-tomorrow", "bad-color", "reaction"], "bookOfferIds": ["book"], "servicesSummary": "Here's what we do, with starting-at pricing: women's cuts from $45 \u00b7 men's cuts from $25 \u00b7 kids' cuts from $20 \u00b7 all-over color from $65 \u00b7 highlights from $95 \u00b7 balayage from $120 \u00b7 beard trims $15 \u00b7 bridal styling from $85 \u00b7 deep conditioning $30. Color consultations are always free.", "greetingHint": "I can answer questions about hours, services, and prices, or help you book an appointment. What can I do for you?", "urgentIntro": "Big day coming up, or something gone wrong? Let's sort it fast. What's going on?", "messageOfferIds": [], "team": [{"initials": "DW", "name": "Dana Whitfield", "role": "Owner & Master Stylist. Dana opened the salon after fifteen years behind the chair and still takes appointments herself."}, {"initials": "CB", "name": "Cole Bennett", "role": "Barber. Fades, classic cuts, and beard work \u2014 and the fastest chair in town on a Saturday."}, {"initials": "SR", "name": "Sofia Reyes", "role": "Color Specialist. Balayage, corrections, and vivid color \u2014 Sofia's consultations are free and famously honest."}]};
 const HOURS = CONFIG.hours;   // JS getDay(): 0 Sun … 6 Sat; null = closed
 const KB = CONFIG.kb.map(e => ({ ...e, phrases: e.phrases.map(p => normalize(p).trim()), keywords: e.keywords.map(k => normalize(k).trim()) }));
 const DAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -293,6 +293,9 @@ function fallbackText(){
 function humanText(){
   return "I'm this business's automated assistant — I handle quick questions and messages, and the team follows up personally.";
 }
+function botNameText(){
+  return "I'm the automated assistant here at " + CONFIG.name + " — I answer quick questions and take messages for the team.";
+}
 function greetingOpen(){
   return "Hi there! 👋 You're chatting with the front desk at " + CONFIG.name + ". " + CONFIG.greetingHint;
 }
@@ -318,10 +321,15 @@ function damerau(a, b){
   return d[m][n];
 }
 // True when a keyword is one small typo away from a word the visitor typed.
-// Same first letter, 4+ letters, 1 edit (2 for long words): catches "whitenig",
-// "apointment", "cleanin" without letting unrelated words match.
+// Same first letter, 1 edit (2 for long words), and only for keywords of
+// 6+ letters: catches "whitenig", "apointment", "cleanin", "engin" without
+// letting unrelated words match. Short keywords are excluded because
+// ordinary words collide with them at distance 1 — "being" would match
+// "bring", "case" would match "cash", "react" would match "reach" — and a
+// fuzzy hit alone clears the threshold, so every message containing
+// "being" would confidently answer a first-visit question.
 function fuzzyHit(keyword, part, exactWords){
-  if (keyword.includes(" ") || keyword.length < 4) return false;
+  if (keyword.includes(" ") || keyword.length < 6) return false;
   const words = part.split(" ").filter(Boolean);
   const maxDist = keyword.length >= 8 ? 2 : 1;
   for (const w of words){
@@ -330,16 +338,24 @@ function fuzzyHit(keyword, part, exactWords){
   }
   return false;
 }
+// Generic words that show up constantly in unrelated text ("first" in a
+// coding question, "pay" in a billing complaint) must never trigger an
+// answer on their own: a match needs at least one strong signal — a
+// phrase hit, or a hit on a non-weak keyword. Weak words still add
+// score, so they can support a strong hit, but weak-only text falls
+// through to the fallback instead of a confident wrong answer.
+const WEAK_KEYWORDS = new Set(["first","form","new","card","call","check","son","child","pay","visit"]);
 function scoreEntry(entry, part){
-  let score = 0;
+  let score = 0, strong = false;
   const words = part.split(" ").filter(Boolean);
   const exactWords = new Set(entry.keywords.filter(k => !k.includes(" ") && words.includes(k)));
-  for (const p of entry.phrases){ if (part.includes(" " + p) || part.includes(p + " ") || part.trim() === p) score += 3; }
+  for (const p of entry.phrases){ if (part.includes(" " + p) || part.includes(p + " ") || part.trim() === p){ score += 3; strong = true; } }
   for (const k of entry.keywords){
-    if (part.includes(" " + k + " ") || part.includes(" " + k)) score += 1;
-    else if (fuzzyHit(k, part, exactWords)) score += 2;
+    const weak = WEAK_KEYWORDS.has(k);
+    if (part.includes(" " + k + " ") || part.includes(" " + k)){ score += 1; if (!weak) strong = true; }
+    else if (fuzzyHit(k, part, exactWords)){ score += 2; if (!weak) strong = true; }
   }
-  return score;
+  return { score: score, strong: strong };
 }
 /* The LLM swap point: in a paid build this calls the client endpoint instead. */
 const DAY_TOKENS = {"monday": 1, "mon": 1, "tuesday": 2, "tue": 2, "tues": 2, "wednesday": 3, "wed": 3, "thursday": 4, "thu": 4, "thur": 4, "thurs": 4, "friday": 5, "fri": 5, "saturday": 6, "sat": 6, "saturdays": 6, "sunday": 0, "sun": 0, "sundays": 0, "mondays": 1, "tuesdays": 2, "wednesdays": 3, "thursdays": 4, "fridays": 5};
@@ -374,6 +390,43 @@ function openAnswer(norm){
   }
   return "Not right now — we reopen " + nextOpeningPhrase(now) + ".";
 }
+// True when the message is a greeting plus a short introduction ("hi, I'm
+// Sarah", "hello, my name is Taye", "hi, I am an AI language model").
+// Deliberately narrow: the identity words must not be knowledge-base
+// keywords (so "hi, I'm looking for a dentist" still reaches the
+// dentists entry), and anything after the intro must be smalltalk only
+// (so "hi, I'm Sarah, how much is a cleaning" still reaches the price
+// entry). This is the whole roleplay allowance: one light greeting-style
+// acknowledgment, then the main quick replies steer back to business
+// topics. No extended roleplay mode.
+function greetingIntro(norm, kb){
+  const tokens = norm.trim().split(/\s+/).filter(Boolean);
+  if (!tokens.length || tokens.length > 14) return false;
+  const GREET = new Set(["hi","hii","hello","hey","heyy","heyyy","helloo","yo","sup","howdy","hiya","hola"]);
+  if (!GREET.has(tokens[0])) return false;
+  const kbWords = new Set();
+  for (const e of kb){ for (const k of e.keywords){ for (const w of k.split(/\s+/)) kbWords.add(w); } }
+  const TAIL = new Set(["do","you","remember","me","what","is","your","name","how","are","doing","nice","to","meet","good","pleased","great","meeting","hope","well","glad","see","again","there","up"]);
+  const STARTERS = new Set(["do","what","how","can","are","is","nice","good","pleased","great","remember","hope","glad","wonderful","lovely"]);
+  for (let s = 1; s <= 2; s++){
+    let mLen = 0;
+    if (tokens[s] === "im") mLen = 1;
+    else if (tokens[s] === "i" && tokens[s+1] === "am") mLen = 2;
+    else if (tokens[s] === "my" && tokens[s+1] === "name" && tokens[s+2] === "is") mLen = 3;
+    else if (tokens[s] === "this" && tokens[s+1] === "is") mLen = 2;
+    else if (tokens[s] === "name" && tokens[s+1] === "is") mLen = 2;
+    if (!mLen) continue;
+    let end = s + mLen;
+    while (end < tokens.length && !STARTERS.has(tokens[end])) end++;
+    const identity = tokens.slice(s + mLen, end);
+    if (!identity.length || identity.length > 5) continue;
+    if (identity.some(w => kbWords.has(w))) continue;
+    const rest = tokens.slice(end);
+    if (rest.length && !rest.every(t => TAIL.has(t))) continue;
+    return true;
+  }
+  return false;
+}
 function getAnswer(userText, kb){
   const norm = normalize(userText);
   if (/\b(human|robot|real person|bot|ai|actual person)\b/.test(norm) &&
@@ -383,6 +436,9 @@ function getAnswer(userText, kb){
   const GREETING_WORDS = new Set(["hi","hii","hello","hey","heyy","heyyy","helloo","yo","sup","howdy","hiya","hola","good","morning","afternoon","evening","there","whats","up","how","are","you","doing","folks","everyone"]);
   const tokens = norm.trim().split(/\s+/).filter(Boolean);
   if (tokens.length && tokens.every(t => GREETING_WORDS.has(t))){
+    return { answers: [isOpenNow() ? greetingOpen() : greetingClosed()], ids: ["greeting"] };
+  }
+  if (greetingIntro(norm, kb)){
     return { answers: [isOpenNow() ? greetingOpen() : greetingClosed()], ids: ["greeting"] };
   }
   // Everyday language, answered before the knowledge base so ordinary
@@ -404,7 +460,7 @@ function getAnswer(userText, kb){
   if (/^(oops|sorry|my bad|oops sorry)$/.test(norm.trim())){
     return { answers: ["No worries at all — what can I help with?"], ids: ["oops"] };
   }
-  if (/^(help|help me|i need help)$/.test(norm.trim())){
+  if (/^(please )?(help|help me|i need help|i need some help|can you help( me)?|could you help( me)?|can i get help)( please)?$/.test(norm.trim())){
     return { answers: ["Of course — I can answer questions about hours, services, and prices, or help you book. Pick one below, or just ask away."], ids: ["help"] };
   }
   if (/^(no|nope|no thanks|no thank you|not interested|i (dont|don t|don't|do not) (want|need))/.test(norm.trim())){
@@ -447,14 +503,17 @@ function getAnswer(userText, kb){
     const np = normalize(part);
     let best = null, bestScore = 0;
     for (const entry of kb){
-      const s = scoreEntry(entry, np);
-      if (s > bestScore){ bestScore = s; best = entry; }
+      const r = scoreEntry(entry, np);
+      if (r.strong && r.score > bestScore){ bestScore = r.score; best = entry; }
     }
     if (best && bestScore >= 2 && !seen.has(best.id)){
       seen.add(best.id);
       found.push(best);
       if (found.length >= 3) break;
     }
+  }
+  if (!found.length && /\b(what is your name|whats your name|who are you|what are you called|what should i call you)\b/.test(norm)){
+    return { answers: [botNameText()], ids: ["bot-name"] };
   }
   if (!found.length && /\b(price|pricing|cost|how much|cheap|expensive)\b/.test(norm)){
     return { answers: [CONFIG.servicesSummary, "Which service were you wondering about?"], ids: ["price-overview"] };
@@ -627,7 +686,7 @@ function handleUserText(text){
   const res = getAnswer(text, KB);
   for (const a of res.answers) botSay(a);
   const id = res.ids[0];
-  if (id === "greeting" || id === "thanks" || id === "farewell" || id === "ack" || id === "oops" || id === "help" || id === "decline" || id === "open-now"){ mainQuick(); return; }
+  if (id === "greeting" || id === "thanks" || id === "farewell" || id === "ack" || id === "oops" || id === "help" || id === "decline" || id === "open-now" || id === "bot-name"){ mainQuick(); return; }
   if (id === "services" || id === "price-overview"){ afterAnswer(); return; }
   if (id === "frustrated" || id === "deals" || id === "staff"){
     pendingOffer = "message"; pendingOfferText = text;
