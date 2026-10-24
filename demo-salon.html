@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magnolia & Main Salon — Live Oak, FL (Demo)</title>
+<style>
+  :root{
+    --main:#9d174d; --main-dark:#831843; --main-light:#fce7f3;
+    --bg:#fffaf8; --ink:#292524; --muted:#57534e;
+    --amber:#b45309; --amber-bg:#fef3c7; --line:#e7e5e4;
+    --radius:14px; --shadow:0 10px 30px rgba(0,0,0,.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif; color:var(--ink); background:var(--bg); line-height:1.55;}
+  a{color:var(--main-dark);}
+  .fiction-banner{background:var(--amber-bg); color:#7c2d12; border-bottom:2px solid var(--amber);
+    text-align:center; padding:10px 16px; font-size:.92rem; font-weight:600;}
+  .fiction-banner span{font-weight:400;}
+  .demo-bar{background:#1c1917; color:#fafaf9; display:flex; flex-wrap:wrap; gap:10px 22px;
+    align-items:center; justify-content:center; padding:9px 16px; font-size:.9rem;}
+  .demo-bar .switch{display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none;}
+  .demo-bar input[type="checkbox"]{width:20px; height:20px; accent-color:#f59e0b; cursor:pointer;}
+  .demo-bar .hint{opacity:.85; font-size:.82rem;}
+  .topbar{position:sticky; top:0; z-index:40; background:#ffffffee; backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);}
+  .topbar-inner{max-width:1080px; margin:0 auto; display:flex; align-items:center; gap:14px; padding:12px 18px; flex-wrap:wrap;}
+  .logo{font-size:1.35rem; font-weight:800; color:var(--main-dark); letter-spacing:.2px;}
+  .logo small{display:block; font-size:.72rem; font-weight:600; color:var(--muted); letter-spacing:1.4px; text-transform:uppercase;}
+  .topbar .spacer{flex:1;}
+  .status-pill{font-size:.8rem; font-weight:700; padding:5px 11px; border-radius:999px; background:var(--main-light); color:var(--main-dark);}
+  .status-pill.closed{background:#fee2e2; color:#991b1b;}
+  .phone-link{font-weight:700; text-decoration:none; font-size:1.02rem; white-space:nowrap;}
+  .btn{display:inline-block; border:none; cursor:pointer; font-weight:700; border-radius:999px;
+    padding:11px 20px; font-size:.95rem; text-decoration:none; transition:transform .08s ease, background .15s ease;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--main); color:#fff;}
+  .btn-primary:hover{background:var(--main-dark);}
+  .btn-ghost{background:#fff; color:var(--main-dark); border:2px solid var(--main);}
+  .btn-ghost:hover{background:var(--main-light);}
+  .hero{background:linear-gradient(120deg,var(--main-dark) 0%,var(--main) 55%,var(--main-light) 160%);
+    color:#fff; padding:64px 18px 72px; text-align:center;}
+  .hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem); line-height:1.2; max-width:820px; margin:0 auto 14px;}
+  .hero p{font-size:clamp(1rem,2.4vw,1.2rem); max-width:640px; margin:0 auto 26px; opacity:.96;}
+  .hero .cta-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+  .hero .btn-ghost{border-color:#fff; color:#fff; background:transparent;}
+  .hero .btn-ghost:hover{background:rgba(255,255,255,.15);}
+  main{max-width:1080px; margin:0 auto; padding:0 18px;}
+  section{padding:44px 0 8px;}
+  h2{font-size:1.55rem; color:var(--main-dark); margin-bottom:6px;}
+  .section-sub{color:var(--muted); margin-bottom:20px;}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px;}
+  .card{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:18px;}
+  .card h3{font-size:1.02rem; margin-bottom:5px;}
+  .card p{font-size:.9rem; color:var(--muted);}
+  .price{display:inline-block; margin-top:8px; font-weight:800; color:var(--main-dark); background:var(--main-light);
+    border:1px solid var(--line); padding:2px 9px; border-radius:999px; font-size:.82rem;}
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:720px){.two-col{grid-template-columns:1fr;}}
+  .panel{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:20px;}
+  table.hours{width:100%; border-collapse:collapse; font-size:.95rem;}
+  table.hours td{padding:6px 4px; border-bottom:1px dashed var(--line);}
+  table.hours tr:last-child td{border-bottom:none;}
+  table.hours td:last-child{text-align:right; font-weight:600;}
+  .today-row td{background:var(--main-light); font-weight:700;}
+  .team-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px;}
+  .avatar{width:52px; height:52px; border-radius:50%; background:var(--main-light); color:var(--main-dark);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; margin-bottom:10px;}
+  .reviews{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px;}
+  .stars{color:#f59e0b; letter-spacing:2px; margin-bottom:6px;}
+  .reviewer{margin-top:8px; font-size:.85rem; color:var(--muted); font-weight:700;}
+  .owner-panel{border:2px dashed var(--main); background:var(--main-light);}
+  .owner-panel h2{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .lead-count{background:var(--main); color:#fff; border-radius:999px; padding:1px 10px; font-size:.8rem;}
+  .lead{background:#fff; border:1px solid var(--line); border-left:5px solid var(--main); border-radius:10px;
+    padding:12px 14px; margin-top:10px; font-size:.93rem;}
+  .lead .when{color:var(--muted); font-size:.8rem;}
+  .lead-empty{color:var(--muted); font-style:italic; margin-top:8px;}
+  .clear-btn{background:none; border:1px solid var(--line); color:var(--muted); border-radius:999px;
+    padding:5px 12px; font-size:.8rem; cursor:pointer; margin-top:12px;}
+  .clear-btn:hover{background:#fef2f2; color:#991b1b;}
+  .owner-note{font-size:.85rem; color:var(--muted); margin-top:12px;}
+  footer{margin-top:52px; background:#1c1917; color:#e7e5e4; padding:30px 18px 90px;}
+  .footer-inner{max-width:1080px; margin:0 auto; font-size:.92rem;}
+  .footer-inner .honest{margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,.25);
+    font-size:.85rem; color:#d6d3d1;}
+  .chat-bubble{position:fixed; right:20px; bottom:20px; z-index:60; width:62px; height:62px; border-radius:50%;
+    background:var(--main); color:#fff; border:none; cursor:pointer; box-shadow:var(--shadow);
+    font-size:1.6rem; display:flex; align-items:center; justify-content:center;}
+  .chat-bubble:hover{background:var(--main-dark);}
+  .chat-bubble .dot{position:absolute; top:2px; right:2px; width:14px; height:14px; border-radius:50%;
+    background:#f59e0b; border:2px solid #fff; display:none;}
+  .chat-panel{position:fixed; right:20px; bottom:92px; z-index:60; width:380px; max-width:calc(100vw - 24px);
+    height:560px; max-height:calc(100vh - 120px); background:#fff; border-radius:18px; box-shadow:var(--shadow);
+    border:1px solid var(--line); display:none; flex-direction:column; overflow:hidden;}
+  .chat-panel.open{display:flex;}
+  .chat-head{background:var(--main); color:#fff; padding:14px 16px;}
+  .chat-head .name{font-weight:800; font-size:1.02rem;}
+  .chat-head .sub{font-size:.8rem; opacity:.92;}
+  .chat-msgs{flex:1; overflow-y:auto; padding:14px; background:var(--main-light); display:flex; flex-direction:column; gap:9px;}
+  .msg{max-width:85%; padding:10px 13px; border-radius:14px; font-size:.93rem; white-space:pre-wrap; word-wrap:break-word;}
+  .msg.bot{background:#fff; border:1px solid var(--line); border-bottom-left-radius:4px; align-self:flex-start;}
+  .msg.user{background:var(--main); color:#fff; border-bottom-right-radius:4px; align-self:flex-end;}
+  .msg.sys{background:transparent; color:var(--muted); font-size:.78rem; text-align:center; align-self:center; font-style:italic;}
+  .quick-row{display:flex; flex-wrap:wrap; gap:7px; padding:10px 12px 4px; background:var(--main-light);}
+  .quick-row:empty{display:none;}
+  .quick{border:1.5px solid var(--main); color:var(--main-dark); background:#fff; border-radius:999px;
+    padding:7px 12px; font-size:.83rem; font-weight:700; cursor:pointer;}
+  .quick:hover{background:var(--main-light);}
+  .chat-input{display:flex; gap:8px; padding:11px; border-top:1px solid var(--line); background:#fff;}
+  .chat-input input{flex:1; border:1.5px solid var(--line); border-radius:999px; padding:10px 14px; font-size:.95rem; outline:none; min-width:0;}
+  .chat-input input:focus{border-color:var(--main);}
+  .chat-input button{background:var(--main); color:#fff; border:none; border-radius:999px; padding:10px 16px; font-weight:700; cursor:pointer;}
+  .chat-input button:hover{background:var(--main-dark);}
+  @media (max-width:560px){
+    .chat-panel{right:0; bottom:0; width:100vw; max-width:100vw; height:100dvh; max-height:100dvh; border-radius:0;}
+    .chat-bubble{right:16px; bottom:16px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="fiction-banner">⚠️ FICTIONAL DEMO — Magnolia & Main Salon is an invented business created to demonstrate an AI receptionist. <span>Not a real business; the address, phone number, staff, prices, and reviews are made up.</span></div>
+
+<div class="demo-bar">
+  <label class="switch"><input type="checkbox" id="afterHoursToggle"> 🌙 Preview after-hours mode</label>
+  <span class="hint">Demo control — flip it to show how the receptionist behaves when the business is closed.</span>
+</div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">💇 Magnolia & Main Salon<small>Hair Salon & Barber · Live Oak, FL</small></div>
+    <div class="spacer"></div>
+    <span class="status-pill" id="statusPill">Checking hours…</span>
+    <a class="phone-link" href="tel:+13865550162">📞 (386) 555-0162</a>
+    <button class="btn btn-primary" data-open-chat="book">Book an appointment</button>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Great hair days in Live Oak — cuts, color, and barbering under one roof</h1>
+  <p>A friendly neighborhood salon where appointments run on time, color consultations are always free, and walk-ins are welcome on weekdays.</p>
+  <div class="cta-row">
+    <button class="btn btn-primary" data-open-chat="book">Book an appointment</button>
+    <button class="btn btn-ghost" data-open-chat="chat">💬 Chat with us</button>
+  </div>
+</div>
+
+<main>
+  <section id="services">
+    <h2>Services & pricing</h2>
+    <p class="section-sub">Free color consultations — we'll talk through what you want and quote it exactly before we start.</p>
+    <div class="grid">
+      <div class="card"><h3>✂️ Women's Cut</h3><p>Consult, cut, wash, and style.</p><span class="price">From $45</span></div>
+      <div class="card"><h3>💈 Men's Cut</h3><p>Classic cuts and fades, finished with a hot-lather neckline.</p><span class="price">From $25</span></div>
+      <div class="card"><h3>🧒 Kids' Cut</h3><p>Patient cuts for kids 12 and under, with a lollipop finish.</p><span class="price">From $20</span></div>
+      <div class="card"><h3>🎨 All-Over Color</h3><p>Full color with a gloss finish.</p><span class="price">From $65</span></div>
+      <div class="card"><h3>✨ Highlights</h3><p>Partial or full highlights, toned to your taste.</p><span class="price">From $95</span></div>
+      <div class="card"><h3>🌅 Balayage</h3><p>Hand-painted, low-maintenance dimension.</p><span class="price">From $120</span></div>
+      <div class="card"><h3>🧔 Beard Trim</h3><p>Shape-up, hot towel, and beard oil finish.</p><span class="price">$15</span></div>
+      <div class="card"><h3>👰 Bridal Styling</h3><p>Updos and party styling for weddings and big occasions.</p><span class="price">From $85</span></div>
+      <div class="card"><h3>💧 Deep Conditioning</h3><p>A restorative treatment for dry or color-treated hair.</p><span class="price">$30</span></div>
+    </div>
+  </section>
+
+  <section id="visit">
+    <h2>Hours &amp; visiting us</h2>
+    <p class="section-sub">Walk-ins welcome Tuesday–Friday; Saturdays are appointment-only and book out fast.</p>
+    <div class="two-col">
+      <div class="panel">
+        <table class="hours" id="hoursTable">
+          <tr data-day="1"><td>Monday</td><td>Closed</td></tr>
+          <tr data-day="2"><td>Tuesday</td><td>9:00 AM – 7:00 PM</td></tr>
+          <tr data-day="3"><td>Wednesday</td><td>9:00 AM – 7:00 PM</td></tr>
+          <tr data-day="4"><td>Thursday</td><td>9:00 AM – 7:00 PM</td></tr>
+          <tr data-day="5"><td>Friday</td><td>9:00 AM – 7:00 PM</td></tr>
+          <tr data-day="6"><td>Saturday</td><td>9:00 AM – 4:00 PM</td></tr>
+          <tr data-day="0"><td>Sunday</td><td>Closed</td></tr>
+        </table>
+      </div>
+      <div class="panel">
+        <h3 style="margin-bottom:8px;">Find us</h3>
+        <p>📍 214 N Ohio Ave, Live Oak, FL 32064<br>
+        🅿️ Free parking behind the building; ♿ step-free entrance on Ohio Ave.<br>
+        📞 (386) 555-0162 · ✉️ hello@magnoliaandmain.example</p>
+        <h3 style="margin:16px 0 8px;">What to bring</h3>
+        <p>Bring inspiration photos if you have them — screenshots help more than descriptions. For color, come with unwashed hair if you can; it takes color better.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <h2>Meet the team</h2>
+    <p class="section-sub">Small team, familiar faces.</p>
+    <div class="team-grid">
+      <div class="card"><div class="avatar">DW</div><h3>Dana Whitfield</h3><p>Owner & Master Stylist. Dana opened the salon after fifteen years behind the chair and still takes appointments herself.</p></div>
+      <div class="card"><div class="avatar">CB</div><h3>Cole Bennett</h3><p>Barber. Fades, classic cuts, and beard work — and the fastest chair in town on a Saturday.</p></div>
+      <div class="card"><div class="avatar">SR</div><h3>Sofia Reyes</h3><p>Color Specialist. Balayage, corrections, and vivid color — Sofia's consultations are free and famously honest.</p></div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <h2>What customers say</h2>
+    <p class="section-sub">A few kind words from our (fictional) customers.</p>
+    <div class="reviews">
+      <div class="card"><div class="stars">★★★★★</div><p>“Sofia talked me OUT of a color that would have fried my hair and gave me something better. That's trust.”</p><div class="reviewer">— Kayla D.</div></div>
+      <div class="card"><div class="stars">★★★★★</div><p>“Walked in on a Tuesday, out in 30 minutes with the best fade I've had in Live Oak.”</p><div class="reviewer">— Jordan M.</div></div>
+      <div class="card"><div class="stars">★★★★★</div><p>“They got my whole bridal party done on time and everyone cried happy tears. Book early for weddings!”</p><div class="reviewer">— Emily R.</div></div>
+    </div>
+  </section>
+
+  <section id="owner">
+    <div class="panel owner-panel">
+      <h2>👀 What the owner sees <span class="lead-count" id="leadCount">0 leads</span></h2>
+      <p>Every booking or message captured by the chat assistant appears here instantly. On a live client build, each lead lands in the owner's email or a Google Sheet the second it happens — even at 2 AM.</p>
+      <div id="leadList"></div>
+      <p class="lead-empty" id="leadEmpty">No leads yet — try the chat in the bottom-right corner.</p>
+      <button class="clear-btn" id="clearLeads">Clear demo leads</button>
+      <p class="owner-note">Demo note: leads are stored only in this browser (localStorage) for demonstration. Nothing is sent anywhere.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <strong>Magnolia & Main Salon</strong> · 214 N Ohio Ave, Live Oak, FL 32064 · (386) 555-0162<br>
+    Hours: Tue–Fri 9–7 · Sat 9–4 · Sun & Mon closed
+    <div class="honest">Demo website built by Sebastian Burke — AI receptionist demo. Magnolia & Main Salon is a fictional business created for demonstration purposes.</div>
+  </div>
+</footer>
+
+<button class="chat-bubble" id="chatBubble" aria-label="Open chat">💬<span class="dot" id="bubbleDot"></span></button>
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Chat">
+  <div class="chat-head">
+    <div class="name">Magnolia & Main Salon</div>
+    <div class="sub" id="chatSub">Typically replies instantly</div>
+  </div>
+  <div class="chat-msgs" id="chatMsgs"></div>
+  <div class="quick-row" id="quickRow"></div>
+  <form class="chat-input" id="chatForm">
+    <input type="text" id="chatText" placeholder="Type your question…" autocomplete="off" maxlength="500" aria-label="Type your message">
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+<script>
+"use strict";
+/* Demo AI receptionist — rule-based intent matching over a fixed knowledge
+   base. In a paid client build, the single getAnswer() swap point below is
+   where an LLM endpoint would be called instead. */
+const CONFIG = {"name": "Magnolia & Main Salon", "phone": "(386) 555-0162", "contactName": "Dana", "leadKey": "mms_demo_leads", "hours": {"0": null, "1": null, "2": [9, 19], "3": [9, 19], "4": [9, 19], "5": [9, 19], "6": [9, 16]}, "kb": [{"id": "hours", "phrases": ["what are your hours", "your hours", "when are you open", "opening hours", "hours of operation", "how late", "what time do you close", "when do you close"], "keywords": ["hours", "open", "close", "closed", "late", "early"], "answer": "We're open Tuesday through Friday 9\u20137, and Saturday 9\u20134. We're closed Sundays and Mondays."}, {"id": "location", "phrases": ["where are you located", "where are you", "your address", "how do i get there", "directions", "parking"], "keywords": ["located", "address", "parking", "directions", "find you"], "answer": "We're at 214 N Ohio Ave in Live Oak. Free parking behind the building, and the entrance on Ohio Ave is step-free."}, {"id": "phone", "phrases": ["phone number", "your number", "call you", "contact you"], "keywords": ["phone", "number", "call", "contact", "reach"], "answer": "You can reach the salon at (386) 555-0162 during business hours \u2014 or just leave your number here and we'll call you."}, {"id": "weekend", "phrases": ["open on weekends", "weekend", "on saturday", "on sunday", "saturdays", "sundays", "open monday", "on monday"], "keywords": ["weekend", "saturday", "sunday", "monday"], "answer": "Saturdays we're open 9\u20134 but appointment-only, and they book out fast. We're closed Sundays and Mondays \u2014 leave a message here and you'll be first in the callback queue Tuesday morning."}, {"id": "womens-cut", "phrases": ["women's cut", "womens cut", "women s cut", "women cut", "ladies cut", "how much is a cut", "cut price"], "keywords": ["women", "ladies"], "answer": "Women's cuts start at $45, including a wash and style \u2014 about an hour. Bring inspiration photos if you have them; they help more than descriptions."}, {"id": "mens-cut", "phrases": ["men's cut", "mens cut", "men s cut", "men cut", "haircut for men", "fade", "buzz cut"], "keywords": ["men", "fade", "buzz"], "answer": "Men's cuts start at $25 with Cole, including a hot-lather neckline \u2014 usually about 30 minutes. Walk-ins welcome Tuesday through Friday."}, {"id": "kids-cut", "phrases": ["kids cut", "kids' cut", "children cut", "child cut", "cut for my son", "cut for my daughter"], "keywords": ["kids", "children", "child", "son", "daughter"], "answer": "Kids' cuts (12 and under) start at $20, and we're patient with nervous little ones \u2014 plus a lollipop at the end, which has never once failed."}, {"id": "color", "phrases": ["color", "hair color", "dye my hair", "all-over color", "full color", "color price"], "keywords": ["color", "dye", "colour"], "answer": "All-over color starts at $65, and consultations are always free \u2014 we'll talk through what you want and quote it exactly before we start. For color, come with unwashed hair if you can; it takes color better."}, {"id": "highlights", "phrases": ["highlights", "highlight", "foils", "partial highlights", "full highlights"], "keywords": ["highlight", "highlights", "foils"], "answer": "Highlights start at $95, partial or full, toned to your taste. Allow about two hours \u2014 and ask about a deep conditioning add-on for $30 if your hair is dry."}, {"id": "balayage", "phrases": ["balayage", "bayalage", "hand-painted", "ombre"], "keywords": ["balayage", "ombre"], "answer": "Balayage starts at $120 with Sofia. It's hand-painted and low-maintenance \u2014 most clients go longer between appointments than with foils. Free consultation first, always."}, {"id": "beard", "phrases": ["beard trim", "beard", "beard shaping", "beard cut"], "keywords": ["beard"], "answer": "Beard trims are $15 with Cole \u2014 shape-up, hot towel, and a beard oil finish. About 20 minutes, walk-ins welcome."}, {"id": "bridal", "phrases": ["bridal", "wedding hair", "wedding party", "bridesmaid", "updo", "formal styling"], "keywords": ["bridal", "wedding", "updo", "formal", "party"], "answer": "Yes \u2014 bridal styling starts at $85, and we take whole parties. Book early for weddings; Saturdays fill weeks ahead. Leave your date here and Dana will call you to plan it."}, {"id": "walk-ins", "phrases": ["walk-ins", "walk in", "do i need an appointment", "appointment needed"], "keywords": ["walk", "appointment"], "answer": "Walk-ins are welcome Tuesday through Friday. Saturdays are appointment-only and book out fast \u2014 if Saturday is your only day, book ahead."}, {"id": "book", "phrases": ["how do i book", "how to book", "book an appointment", "make an appointment", "schedule", "book me in"], "keywords": ["book", "booking", "appointment", "schedule"], "answer": "Easy \u2014 just tell me your name, your phone number, and what you'd like, and Dana will call you to confirm a time. Want to do that now?"}, {"id": "cancel", "phrases": ["reschedule", "cancel", "change my appointment", "move my appointment"], "keywords": ["reschedule", "cancel", "change"], "answer": "No problem \u2014 call us at (386) 555-0162, or leave a message here with your new preferred time. We just ask for 24 hours' notice when you can, since Saturdays book out."}, {"id": "patch-test", "phrases": ["patch test", "allergy test", "sensitive scalp", "sensitive skin"], "keywords": ["patch", "sensitive", "allergy"], "answer": "For color, we offer a free patch test 48 hours before your appointment \u2014 especially important if you've ever reacted to color before. Mention it when you book and we'll set it up."}, {"id": "products", "phrases": ["what products", "products you use", "shampoo", "retail", "buy products"], "keywords": ["products", "shampoo", "retail"], "answer": "We use professional salon products, and most of them are available to buy at the front desk. If you love what we used on your hair, just ask and we'll point you to it."}, {"id": "gift-cards", "phrases": ["gift card", "gift cards", "gift certificate"], "keywords": ["gift", "certificate"], "answer": "Yes \u2014 gift cards in any amount, available at the front desk. They make a suspiciously good birthday present."}, {"id": "payment", "phrases": ["payment", "credit card", "forms of payment", "how can i pay", "do you take cards"], "keywords": ["pay", "payment", "card", "cash"], "answer": "Cash and all major credit and debit cards. We don't take personal checks."}, {"id": "parking", "phrases": ["parking", "where do i park"], "keywords": ["park", "parking"], "answer": "Free parking behind the building, and the Ohio Ave entrance is step-free."}, {"id": "first-visit", "phrases": ["first visit", "what should i bring", "bring to", "first time"], "keywords": ["bring", "first", "visit"], "answer": "Just yourself \u2014 and inspiration photos if you have them. For color, unwashed hair takes color better, so skip the wash that morning if you can."}, {"id": "event-tomorrow", "phrases": ["big event tomorrow", "event tomorrow", "wedding tomorrow", "prom tomorrow", "date tonight"], "keywords": ["tomorrow", "event", "wedding", "prom", "tonight"], "answer": "We keep a squeeze-in list for exactly this. Leave your name, number, and what you need, and we'll call you the moment a chair opens \u2014 and we'll be honest if we truly can't fit you in."}, {"id": "bad-color", "phrases": ["color went wrong", "color went orange", "went orange", "my color is orange", "brassy", "botched", "ruined my hair"], "keywords": ["orange", "brassy", "botched", "ruined", "wrong"], "answer": "Don't try to fix it at home with another box \u2014 that usually makes it harder to correct. Leave your details here and Sofia will call you to book a free correction consultation; she'll tell you honestly what can be done."}, {"id": "reaction", "phrases": ["reaction", "itchy scalp", "rash", "burning scalp", "allergic reaction"], "keywords": ["itch", "itchy", "rash", "burn", "reaction", "allergic", "swell"], "answer": "Rinse the product out with cool water and stop using it. If you have swelling, trouble breathing, or the irritation is spreading, seek medical care right away rather than waiting. Otherwise leave your details here and we'll call you to talk through what happened."}], "quickReplies": [{"label": "\ud83d\udcc5 Book an appointment", "kind": "book"}, {"label": "\ud83d\udd50 Hours & location", "kind": "hours"}, {"label": "\ud83d\udc87 Services & prices", "kind": "services"}, {"label": "\ud83c\udfa8 Color & bridal", "kind": "kb", "target": "color"}, {"label": "\ud83d\udc87\u200d\u2640\ufe0f Hair emergency", "kind": "urgent"}], "urgentMenu": [{"label": "\ud83c\udf89 Big event tomorrow", "id": "event-tomorrow", "pattern": "tomorrow|event|wedding|prom|date tonight|big day|tonight"}, {"label": "\ud83d\ude1f Color went wrong", "id": "bad-color", "pattern": "color went wrong|orange|brassy|botched|dyed|ruined"}, {"label": "\u26a0\ufe0f Reaction / irritation", "id": "reaction", "pattern": "itch|itchy|rash|burn|reaction|allergic|swell"}], "urgentIds": ["event-tomorrow", "bad-color", "reaction"], "bookOfferIds": ["book"], "servicesSummary": "Here's what we do, with starting-at pricing: women's cuts from $45 \u00b7 men's cuts from $25 \u00b7 kids' cuts from $20 \u00b7 all-over color from $65 \u00b7 highlights from $95 \u00b7 balayage from $120 \u00b7 beard trims $15 \u00b7 bridal styling from $85 \u00b7 deep conditioning $30. Color consultations are always free.", "greetingHint": "I can answer questions about hours, services, and prices, or help you book an appointment. What can I do for you?", "urgentIntro": "Big day coming up, or something gone wrong? Let's sort it fast. What's going on?"};
+const HOURS = CONFIG.hours;   // JS getDay(): 0 Sun … 6 Sat; null = closed
+const KB = CONFIG.kb;
+const DAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+let forceAfterHours = false;
+
+function fmtHour(h){
+  if (h === 12) return "12:00 PM";
+  if (h === 0) return "12:00 AM";
+  return h < 12 ? h + ":00 AM" : (h - 12) + ":00 PM";
+}
+function isOpenNow(now){
+  if (forceAfterHours) return false;
+  now = now || new Date();
+  const h = HOURS[now.getDay()];
+  if (!h) return false;
+  const t = now.getHours() + now.getMinutes() / 60;
+  return t >= h[0] && t < h[1];
+}
+function nextOpeningPhrase(now){
+  now = now || new Date();
+  for (let add = 0; add < 8; add++){
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + add);
+    const h = HOURS[d.getDay()];
+    if (!h) continue;
+    if (add === 0){
+      const t = now.getHours() + now.getMinutes() / 60;
+      if (t >= h[0]) continue;
+    }
+    const when = add === 0 ? "today" : add === 1 ? "tomorrow" : DAY_NAMES[d.getDay()];
+    return when + " at " + fmtHour(h[0]);
+  }
+  return "Monday at 8:00 AM";
+}
+function closePhrase(now){
+  const h = HOURS[now.getDay()];
+  return h ? "Open now · until " + fmtHour(h[1]) : "";
+}
+function fallbackText(){
+  return "That's a great question — I don't want to guess on that one. I can take a message and have " + CONFIG.contactName + " call you back with the answer, or you can reach us at " + CONFIG.phone + ". Want me to take a message?";
+}
+function humanText(){
+  return "I'm this business's automated assistant — I handle quick questions and messages, and the team follows up personally.";
+}
+function greetingOpen(){
+  return "Hi there! 👋 You're chatting with the front desk at " + CONFIG.name + ". " + CONFIG.greetingHint;
+}
+function greetingClosed(){
+  return "Hi! " + CONFIG.name + " is closed right now — we reopen " + nextOpeningPhrase() + ". I'm the after-hours assistant: I can answer quick questions and take messages so the team can call you back when we open.";
+}
+function normalize(text){
+  return " " + text.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim() + " ";
+}
+function scoreEntry(entry, part){
+  let score = 0;
+  for (const p of entry.phrases){ if (part.includes(" " + p) || part.includes(p + " ") || part.trim() === p) score += 3; }
+  for (const k of entry.keywords){ if (part.includes(" " + k + " ") || part.includes(" " + k)) score += 1; }
+  return score;
+}
+/* The LLM swap point: in a paid build this calls the client endpoint instead. */
+function getAnswer(userText, kb){
+  const norm = normalize(userText);
+  if (/\b(human|robot|real person|bot|ai|actual person)\b/.test(norm) &&
+      /\b(are you|you a|you an|am i talking)\b/.test(norm)) {
+    return { answers: [humanText()], ids: ["human"] };
+  }
+  const raw = userText.toLowerCase();
+  let parts = raw.split("?").map(s => s.trim()).filter(Boolean);
+  let expanded = [];
+  for (const p of parts){
+    const sub = p.split(/\s+and\s+/).map(s => s.trim()).filter(Boolean);
+    if (sub.length > 1 && sub.every(s => s.split(/\s+/).length >= 2)) expanded.push(...sub);
+    else expanded.push(p);
+  }
+  parts = expanded.length ? expanded : [raw];
+  const found = [], seen = new Set();
+  for (const part of parts){
+    const np = normalize(part);
+    let best = null, bestScore = 0;
+    for (const entry of kb){
+      const s = scoreEntry(entry, np);
+      if (s > bestScore){ bestScore = s; best = entry; }
+    }
+    if (best && bestScore >= 2 && !seen.has(best.id)){
+      seen.add(best.id);
+      found.push(best);
+      if (found.length >= 2) break;
+    }
+  }
+  if (!found.length) return { answers: [fallbackText()], ids: ["fallback"] };
+  return { answers: found.map(e => fillDynamic(e.answer)), ids: found.map(e => e.id) };
+}
+function fillDynamic(text){
+  return text.replace("[NEXT_OPENING]", nextOpeningPhrase());
+}
+
+/* ---------- Chat UI (browser only) ---------- */
+let msgsEl, quickEl, inputEl, greeted = false, leadFlow = null, pendingOffer = null, pendingOfferText = null;
+function addMsg(text, who){
+  const d = document.createElement("div");
+  d.className = "msg " + who;
+  d.textContent = text;
+  msgsEl.appendChild(d);
+  // Bound memory: a chat session never holds more than the last 200 messages.
+  while (msgsEl.children.length > 200) msgsEl.removeChild(msgsEl.firstChild);
+  msgsEl.scrollTop = msgsEl.scrollHeight;
+  return d;
+}
+function addSys(text){ addMsg(text, "sys"); }
+function botSay(text){ addMsg(text, "bot"); }
+function setQuickButtons(list){
+  quickEl.innerHTML = "";
+  for (const b of list){
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "quick";
+    btn.textContent = b.label;
+    btn.addEventListener("click", () => b.action());
+    quickEl.appendChild(btn);
+  }
+}
+function kbAnswer(id){
+  const e = KB.find(x => x.id === id);
+  return e ? fillDynamic(e.answer) : fallbackText();
+}
+function quickAction(q){
+  if (q.kind === "book"){ addMsg(q.label, "user"); startLead("booking"); }
+  else if (q.kind === "services"){ addMsg(q.label, "user"); botSay(CONFIG.servicesSummary); botSay("Want details on any of those — or shall I help you book?"); afterAnswer(); }
+  else if (q.kind === "hours"){ addMsg(q.label, "user"); botSay(kbAnswer("hours")); botSay(kbAnswer("location")); afterAnswer(); }
+  else if (q.kind === "urgent"){ addMsg(q.label, "user"); urgentMenu(); }
+  else if (q.kind === "kb"){ addMsg(q.label, "user"); botSay(kbAnswer(q.target)); afterAnswer(); }
+}
+function mainQuick(){
+  setQuickButtons(CONFIG.quickReplies.map(q => ({ label: q.label, action: () => quickAction(q) })));
+}
+function urgentMenu(){
+  botSay(CONFIG.urgentIntro);
+  setQuickButtons(CONFIG.urgentMenu.map(u => ({ label: u.label, action: () => urgentAnswer(u.id) })));
+}
+function urgentAnswer(id){
+  botSay(kbAnswer(id));
+  if (!isOpenNow()){
+    botSay("Since we're closed right now, leave your details and you'll be first in the callback queue when we open " + nextOpeningPhrase() + ".");
+  } else {
+    botSay("Leave your details here and the team will get back to you as soon as they can — usually within the hour during business hours.");
+  }
+  setQuickButtons([
+    { label: "📝 Take my details", action: () => startLead("urgent") },
+    { label: "↩️ Back to main menu", action: () => { botSay("Of course — what else can I do for you?"); mainQuick(); } }
+  ]);
+}
+function afterAnswer(){
+  if (!isOpenNow()){
+    botSay("Anything else? I can also take a message so the team can call you back when we open.");
+  }
+  mainQuick();
+}
+function startLead(reason, prefillNeed){
+  leadFlow = { step: "name", name: "", phone: "", need: "", reason: reason || "booking" };
+  pendingOffer = null;
+  setQuickButtons([]);
+  if (reason === "message") botSay("Of course — I'll take a message for " + CONFIG.contactName + ". What's your first name?");
+  else if (reason === "urgent") botSay("Let's get you in the callback queue. What's your first name?");
+  else botSay("I can help with that! What's your first name?");
+  if (prefillNeed) leadFlow.prefillNeed = prefillNeed;
+  inputEl.focus();
+}
+function leadStep(text){
+  const t = text.trim();
+  if (/^(cancel|stop|never mind|nevermind|quit)$/i.test(t)){
+    leadFlow = null;
+    botSay("No problem — cancelled. What else can I do for you?");
+    mainQuick();
+    return;
+  }
+  if (leadFlow.step === "name"){
+    leadFlow.name = t.split(/\s+/)[0].replace(/[^A-Za-z'-]/g, "") || t;
+    leadFlow.step = "phone";
+    botSay("Thanks, " + leadFlow.name + ". What's the best phone number to reach you?");
+    return;
+  }
+  if (leadFlow.step === "phone"){
+    const digits = t.replace(/\D/g, "");
+    if (digits.length < 7){
+      botSay("Hmm, that number looks a little short — could you re-enter the best phone number to reach you? (Area code helps.)");
+      return;
+    }
+    leadFlow.phone = t;
+    leadFlow.step = "need";
+    if (leadFlow.prefillNeed){
+      botSay("And in a few words, anything you'd like to add? Your question was: “" + leadFlow.prefillNeed + "” — or just say “that's it.”");
+    } else {
+      botSay("And in a few words, what do you need?");
+    }
+    return;
+  }
+  if (leadFlow.step === "need"){
+    let need = t;
+    if (leadFlow.prefillNeed && /^(that'?s it|thats it|it|ok|okay|yes)$/i.test(t)) need = leadFlow.prefillNeed;
+    else if (leadFlow.prefillNeed) need = leadFlow.prefillNeed + " — " + t;
+    leadFlow.need = need;
+    finishLead();
+    return;
+  }
+}
+function finishLead(){
+  const lead = { name: leadFlow.name, phone: leadFlow.phone, need: leadFlow.need,
+    reason: leadFlow.reason, afterHours: !isOpenNow(), time: new Date().toISOString() };
+  saveLead(lead);
+  const name = leadFlow.name, phone = leadFlow.phone;
+  leadFlow = null;
+  if (!isOpenNow()){
+    botSay("You're all set, " + name + "! I've passed this to " + CONFIG.contactName + ". We're closed right now, so you'll be first in the callback queue — we'll call you at " + phone + " as soon as we reopen " + nextOpeningPhrase() + ". Anything else I can help with?");
+  } else {
+    botSay("You're all set, " + name + "! I've passed this to " + CONFIG.contactName + ". We'll call you at " + phone + " during business hours to confirm — usually within the hour. Anything else I can help with?");
+  }
+  addSys("✅ Lead sent — see the “What the owner sees” panel on this page.");
+  mainQuick();
+}
+const BOOK_REQUEST = /\b(book|schedule|make|set up|need|want|get)\b[^.!?]{0,30}\b(appointment|appt|visit|service|reservation|table|cut|booking)\b|\bbook me\b|\bi want to book\b|\bplease book\b/;
+function handleUserText(text){
+  addMsg(text, "user");
+  if (leadFlow){ leadStep(text); return; }
+  const norm = normalize(text);
+  if (pendingOffer){
+    if (/^\s*(yes|yeah|yep|sure|ok|okay|please|go ahead|sounds good)\b/.test(norm)){
+      const offer = pendingOffer; pendingOffer = null;
+      startLead(offer === "book" ? "booking" : "message", offer === "message" ? pendingOfferText : null);
+      return;
+    }
+    if (/^\s*(no|nope|not now|later)\b/.test(norm)){
+      pendingOffer = null;
+      botSay("No problem at all. What else can I do for you?");
+      mainQuick();
+      return;
+    }
+    pendingOffer = null;
+  }
+  if (BOOK_REQUEST.test(text.toLowerCase()) && !/how|what|where|when/.test(norm)){
+    startLead("booking");
+    return;
+  }
+  for (const u of CONFIG.urgentMenu){
+    if (u.pattern && new RegExp(u.pattern, "i").test(text)){ urgentAnswer(u.id); return; }
+  }
+  const res = getAnswer(text, KB);
+  for (const a of res.answers) botSay(a);
+  const id = res.ids[0];
+  if (id === "fallback"){
+    pendingOffer = "message"; pendingOfferText = text;
+    setQuickButtons([
+      { label: "📝 Yes, take a message", action: () => { pendingOffer = null; startLead("message", text); } },
+      { label: "↩️ No thanks", action: () => { pendingOffer = null; botSay("No problem — what else can I help with?"); mainQuick(); } }
+    ]);
+    return;
+  }
+  if (id === "book" || (CONFIG.bookOfferIds || []).includes(id)){
+    pendingOffer = "book";
+    setQuickButtons([
+      { label: "📅 Yes, let's book", action: () => { pendingOffer = null; startLead("booking"); } },
+      { label: "💬 Just browsing", action: () => { pendingOffer = null; botSay("Happy to help — ask me anything else."); mainQuick(); } }
+    ]);
+    return;
+  }
+  if (CONFIG.urgentIds.includes(id)){
+    setQuickButtons([
+      { label: "📝 Take my details", action: () => startLead("urgent") },
+      { label: "↩️ Back to main menu", action: () => { botSay("Of course — what else can I do for you?"); mainQuick(); } }
+    ]);
+    return;
+  }
+  if (!isOpenNow()){
+    botSay("We're closed right now, but I can take a message and the team will call you back when we open " + nextOpeningPhrase() + ".");
+    pendingOffer = "message"; pendingOfferText = text;
+    setQuickButtons([
+      { label: "📝 Take a message", action: () => { pendingOffer = null; startLead("message", text); } },
+      { label: "💬 Keep chatting", action: () => { pendingOffer = null; botSay("Sure — what else would you like to know?"); mainQuick(); } }
+    ]);
+    return;
+  }
+  afterAnswer();
+}
+function loadLeads(){
+  try { return JSON.parse(localStorage.getItem(CONFIG.leadKey) || "[]"); } catch(e){ return []; }
+}
+function saveLead(lead){
+  const leads = loadLeads();
+  leads.unshift(lead);
+  try { localStorage.setItem(CONFIG.leadKey, JSON.stringify(leads)); } catch(e){}
+  renderLeads();
+  const dot = document.getElementById("bubbleDot");
+  if (dot) dot.style.display = "block";
+}
+function renderLeads(){
+  const leads = loadLeads();
+  const list = document.getElementById("leadList");
+  const empty = document.getElementById("leadEmpty");
+  const count = document.getElementById("leadCount");
+  count.textContent = leads.length + (leads.length === 1 ? " lead" : " leads");
+  empty.style.display = leads.length ? "none" : "block";
+  list.innerHTML = "";
+  for (const l of leads){
+    const d = document.createElement("div");
+    d.className = "lead";
+    const when = new Date(l.time);
+    const whenStr = when.toLocaleDateString([], { weekday:"short", month:"short", day:"numeric" }) + " · " +
+                    when.toLocaleTimeString([], { hour:"numeric", minute:"2-digit" });
+    d.innerHTML = "<strong></strong> · <span class='phone'></span><br><span class='need'></span><br><span class='when'></span>";
+    d.querySelector("strong").textContent = "🧾 " + l.name;
+    d.querySelector(".phone").textContent = l.phone;
+    d.querySelector(".need").textContent = "Needs: " + l.need;
+    d.querySelector(".when").textContent = whenStr + (l.afterHours ? " · 🌙 captured after hours" : "") + (l.reason === "message" ? " · message for " + CONFIG.contactName : l.reason === "urgent" ? " · 🚨 urgent" : " · booking request");
+    list.appendChild(d);
+  }
+}
+function refreshStatus(){
+  const pill = document.getElementById("statusPill");
+  const sub = document.getElementById("chatSub");
+  const now = new Date();
+  if (isOpenNow(now)){
+    pill.textContent = "🟢 " + closePhrase(now);
+    pill.classList.remove("closed");
+    sub.textContent = "Typically replies instantly · Open now";
+  } else {
+    pill.textContent = "🔴 Closed · Reopens " + nextOpeningPhrase(now);
+    pill.classList.add("closed");
+    sub.textContent = "After-hours assistant · We reopen " + nextOpeningPhrase(now);
+  }
+  document.querySelectorAll("#hoursTable tr").forEach(tr => {
+    tr.classList.toggle("today-row", Number(tr.dataset.day) === now.getDay());
+  });
+}
+function greet(){
+  botSay(isOpenNow() ? greetingOpen() : greetingClosed());
+  mainQuick();
+  greeted = true;
+}
+function openChat(mode){
+  const panel = document.getElementById("chatPanel");
+  panel.classList.add("open");
+  document.getElementById("bubbleDot").style.display = "none";
+  if (!greeted) greet();
+  if (mode === "book" && !leadFlow) startLead("booking");
+  setTimeout(() => inputEl.focus(), 60);
+}
+if (typeof document !== "undefined"){
+  msgsEl = document.getElementById("chatMsgs");
+  quickEl = document.getElementById("quickRow");
+  inputEl = document.getElementById("chatText");
+  document.getElementById("chatBubble").addEventListener("click", () => {
+    const panel = document.getElementById("chatPanel");
+    if (panel.classList.contains("open")) panel.classList.remove("open");
+    else openChat("chat");
+  });
+  document.querySelectorAll("[data-open-chat]").forEach(el => {
+    el.addEventListener("click", () => openChat(el.dataset.openChat));
+  });
+  document.getElementById("chatForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = inputEl.value.trim();
+    if (!text) return;
+    inputEl.value = "";
+    handleUserText(text);
+  });
+  document.getElementById("clearLeads").addEventListener("click", () => {
+    try { localStorage.removeItem(CONFIG.leadKey); } catch(e){}
+    renderLeads();
+  });
+  document.getElementById("afterHoursToggle").addEventListener("change", (e) => {
+    forceAfterHours = e.target.checked;
+    refreshStatus();
+    const panel = document.getElementById("chatPanel");
+    if (panel.classList.contains("open")){
+      addSys(forceAfterHours ? "🌙 After-hours mode preview ON — the assistant now behaves as if the business is closed."
+                             : "☀️ After-hours preview OFF — back to the real clock.");
+      botSay(isOpenNow() ? greetingOpen() : greetingClosed());
+      mainQuick();
+    }
+  });
+  refreshStatus();
+  renderLeads();
+  setInterval(refreshStatus, 60000);
+}
+</script>
+</body>
+</html>
