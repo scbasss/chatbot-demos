@@ -6,72 +6,56 @@
 <title>Magnolia Grove Dental — Live Oak, FL (Demo)</title>
 <style>
   :root{
-    --teal:#0f766e; --teal-dark:#115e59; --teal-light:#ccfbf1;
-    --sage:#f0fdf9; --cream:#fffdf7; --ink:#1f2937; --muted:#5b6b66;
-    --amber:#b45309; --amber-bg:#fef3c7; --line:#d9e8e2;
-    --radius:14px; --shadow:0 10px 30px rgba(15,118,110,.18);
+    --main:#0f766e; --main-dark:#115e59; --main-light:#ccfbf1;
+    --bg:#fffdf7; --ink:#292524; --muted:#57534e;
+    --amber:#b45309; --amber-bg:#fef3c7; --line:#e7e5e4;
+    --radius:14px; --shadow:0 10px 30px rgba(0,0,0,.18);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif; color:var(--ink); background:var(--cream); line-height:1.55;}
-  a{color:var(--teal-dark);}
-
-  /* Fictional banner */
+  body{font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif; color:var(--ink); background:var(--bg); line-height:1.55;}
+  a{color:var(--main-dark);}
   .fiction-banner{background:var(--amber-bg); color:#7c2d12; border-bottom:2px solid var(--amber);
     text-align:center; padding:10px 16px; font-size:.92rem; font-weight:600;}
   .fiction-banner span{font-weight:400;}
-
-  /* Demo controls */
-  .demo-bar{background:#134e4a; color:#ecfdf5; display:flex; flex-wrap:wrap; gap:10px 22px;
+  .demo-bar{background:#1c1917; color:#fafaf9; display:flex; flex-wrap:wrap; gap:10px 22px;
     align-items:center; justify-content:center; padding:9px 16px; font-size:.9rem;}
   .demo-bar .switch{display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none;}
   .demo-bar input[type="checkbox"]{width:20px; height:20px; accent-color:#f59e0b; cursor:pointer;}
   .demo-bar .hint{opacity:.85; font-size:.82rem;}
-
-  /* Top bar */
   .topbar{position:sticky; top:0; z-index:40; background:#ffffffee; backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);}
   .topbar-inner{max-width:1080px; margin:0 auto; display:flex; align-items:center; gap:14px; padding:12px 18px; flex-wrap:wrap;}
-  .logo{font-size:1.35rem; font-weight:800; color:var(--teal-dark); letter-spacing:.2px;}
+  .logo{font-size:1.35rem; font-weight:800; color:var(--main-dark); letter-spacing:.2px;}
   .logo small{display:block; font-size:.72rem; font-weight:600; color:var(--muted); letter-spacing:1.4px; text-transform:uppercase;}
   .topbar .spacer{flex:1;}
-  .status-pill{font-size:.8rem; font-weight:700; padding:5px 11px; border-radius:999px; background:var(--teal-light); color:var(--teal-dark);}
+  .status-pill{font-size:.8rem; font-weight:700; padding:5px 11px; border-radius:999px; background:var(--main-light); color:var(--main-dark);}
   .status-pill.closed{background:#fee2e2; color:#991b1b;}
   .phone-link{font-weight:700; text-decoration:none; font-size:1.02rem; white-space:nowrap;}
   .btn{display:inline-block; border:none; cursor:pointer; font-weight:700; border-radius:999px;
     padding:11px 20px; font-size:.95rem; text-decoration:none; transition:transform .08s ease, background .15s ease;}
   .btn:active{transform:scale(.97);}
-  .btn-primary{background:var(--teal); color:#fff;}
-  .btn-primary:hover{background:var(--teal-dark);}
-  .btn-ghost{background:#fff; color:var(--teal-dark); border:2px solid var(--teal);}
-  .btn-ghost:hover{background:var(--sage);}
-
-  /* Hero */
-  .hero{background:
-      radial-gradient(circle at 85% 20%, rgba(255,255,255,.35) 0 90px, transparent 91px),
-      radial-gradient(circle at 10% 90%, rgba(255,255,255,.22) 0 130px, transparent 131px),
-      linear-gradient(120deg,#0f766e 0%,#14b8a6 55%,#5eead4 130%);
+  .btn-primary{background:var(--main); color:#fff;}
+  .btn-primary:hover{background:var(--main-dark);}
+  .btn-ghost{background:#fff; color:var(--main-dark); border:2px solid var(--main);}
+  .btn-ghost:hover{background:var(--main-light);}
+  .hero{background:linear-gradient(120deg,var(--main-dark) 0%,var(--main) 55%,var(--main-light) 160%);
     color:#fff; padding:64px 18px 72px; text-align:center;}
   .hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem); line-height:1.2; max-width:820px; margin:0 auto 14px;}
   .hero p{font-size:clamp(1rem,2.4vw,1.2rem); max-width:640px; margin:0 auto 26px; opacity:.96;}
   .hero .cta-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
   .hero .btn-ghost{border-color:#fff; color:#fff; background:transparent;}
   .hero .btn-ghost:hover{background:rgba(255,255,255,.15);}
-
   main{max-width:1080px; margin:0 auto; padding:0 18px;}
   section{padding:44px 0 8px;}
-  h2{font-size:1.55rem; color:var(--teal-dark); margin-bottom:6px;}
+  h2{font-size:1.55rem; color:var(--main-dark); margin-bottom:6px;}
   .section-sub{color:var(--muted); margin-bottom:20px;}
-
-  /* Services */
   .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px;}
   .card{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:18px;}
   .card h3{font-size:1.02rem; margin-bottom:5px;}
   .card p{font-size:.9rem; color:var(--muted);}
-  .price{display:inline-block; margin-top:8px; font-weight:800; color:var(--teal-dark); background:var(--sage);
+  .price{display:inline-block; margin-top:8px; font-weight:800; color:var(--main-dark); background:var(--main-light);
     border:1px solid var(--line); padding:2px 9px; border-radius:999px; font-size:.82rem;}
-
-  /* Hours / visit */
   .two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
   @media (max-width:720px){.two-col{grid-template-columns:1fr;}}
   .panel{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:20px;}
@@ -79,71 +63,56 @@
   table.hours td{padding:6px 4px; border-bottom:1px dashed var(--line);}
   table.hours tr:last-child td{border-bottom:none;}
   table.hours td:last-child{text-align:right; font-weight:600;}
-  .evening{color:var(--teal-dark); font-weight:800;}
-  .today-row td{background:var(--sage); font-weight:700;}
-
-  /* Team */
+  .today-row td{background:var(--main-light); font-weight:700;}
   .team-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px;}
-  .avatar{width:52px; height:52px; border-radius:50%; background:var(--teal-light); color:var(--teal-dark);
+  .avatar{width:52px; height:52px; border-radius:50%; background:var(--main-light); color:var(--main-dark);
     display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; margin-bottom:10px;}
-
-  /* Reviews */
   .reviews{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px;}
   .stars{color:#f59e0b; letter-spacing:2px; margin-bottom:6px;}
   .reviewer{margin-top:8px; font-size:.85rem; color:var(--muted); font-weight:700;}
-
-  /* Insurance strip */
-  .insurance{background:var(--teal-dark); color:#ecfdf5; border-radius:var(--radius); padding:26px 24px; text-align:center;}
-  .insurance h2{color:#fff;}
-  .insurance p{max-width:640px; margin:0 auto;}
-
-  /* Owner panel */
-  .owner-panel{border:2px dashed var(--teal); background:#f0fdf9;}
+  .owner-panel{border:2px dashed var(--main); background:var(--main-light);}
   .owner-panel h2{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
-  .lead-count{background:var(--teal); color:#fff; border-radius:999px; padding:1px 10px; font-size:.8rem;}
-  .lead{background:#fff; border:1px solid var(--line); border-left:5px solid var(--teal); border-radius:10px;
+  .lead-count{background:var(--main); color:#fff; border-radius:999px; padding:1px 10px; font-size:.8rem;}
+  .lead{background:#fff; border:1px solid var(--line); border-left:5px solid var(--main); border-radius:10px;
     padding:12px 14px; margin-top:10px; font-size:.93rem;}
   .lead .when{color:var(--muted); font-size:.8rem;}
   .lead-empty{color:var(--muted); font-style:italic; margin-top:8px;}
-  .owner-note{font-size:.85rem; color:var(--muted); margin-top:12px;}
   .clear-btn{background:none; border:1px solid var(--line); color:var(--muted); border-radius:999px;
     padding:5px 12px; font-size:.8rem; cursor:pointer; margin-top:12px;}
   .clear-btn:hover{background:#fef2f2; color:#991b1b;}
-
-  footer{margin-top:52px; background:#134e4a; color:#d1fae5; padding:30px 18px 90px;}
+  .owner-note{font-size:.85rem; color:var(--muted); margin-top:12px;}
+  footer{margin-top:52px; background:#1c1917; color:#e7e5e4; padding:30px 18px 90px;}
   .footer-inner{max-width:1080px; margin:0 auto; font-size:.92rem;}
   .footer-inner .honest{margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,.25);
-    font-size:.85rem; color:#a7f3d0;}
-
-  /* Chat widget */
+    font-size:.85rem; color:#d6d3d1;}
   .chat-bubble{position:fixed; right:20px; bottom:20px; z-index:60; width:62px; height:62px; border-radius:50%;
-    background:var(--teal); color:#fff; border:none; cursor:pointer; box-shadow:var(--shadow);
+    background:var(--main); color:#fff; border:none; cursor:pointer; box-shadow:var(--shadow);
     font-size:1.6rem; display:flex; align-items:center; justify-content:center;}
-  .chat-bubble:hover{background:var(--teal-dark);}
+  .chat-bubble:hover{background:var(--main-dark);}
   .chat-bubble .dot{position:absolute; top:2px; right:2px; width:14px; height:14px; border-radius:50%;
     background:#f59e0b; border:2px solid #fff; display:none;}
   .chat-panel{position:fixed; right:20px; bottom:92px; z-index:60; width:380px; max-width:calc(100vw - 24px);
     height:560px; max-height:calc(100vh - 120px); background:#fff; border-radius:18px; box-shadow:var(--shadow);
     border:1px solid var(--line); display:none; flex-direction:column; overflow:hidden;}
   .chat-panel.open{display:flex;}
-  .chat-head{background:var(--teal); color:#fff; padding:14px 16px;}
+  .chat-head{background:var(--main); color:#fff; padding:14px 16px;}
   .chat-head .name{font-weight:800; font-size:1.02rem;}
   .chat-head .sub{font-size:.8rem; opacity:.92;}
-  .chat-msgs{flex:1; overflow-y:auto; padding:14px; background:var(--sage); display:flex; flex-direction:column; gap:9px;}
+  .chat-msgs{flex:1; overflow-y:auto; padding:14px; background:var(--main-light); display:flex; flex-direction:column; gap:9px;}
   .msg{max-width:85%; padding:10px 13px; border-radius:14px; font-size:.93rem; white-space:pre-wrap; word-wrap:break-word;}
   .msg.bot{background:#fff; border:1px solid var(--line); border-bottom-left-radius:4px; align-self:flex-start;}
-  .msg.user{background:var(--teal); color:#fff; border-bottom-right-radius:4px; align-self:flex-end;}
+  .msg.user{background:var(--main); color:#fff; border-bottom-right-radius:4px; align-self:flex-end;}
   .msg.sys{background:transparent; color:var(--muted); font-size:.78rem; text-align:center; align-self:center; font-style:italic;}
-  .quick-row{display:flex; flex-wrap:wrap; gap:7px; padding:10px 12px 4px; background:var(--sage);}
+  .quick-row{display:flex; flex-wrap:wrap; gap:7px; padding:10px 12px 4px; background:var(--main-light);}
   .quick-row:empty{display:none;}
-  .quick{border:1.5px solid var(--teal); color:var(--teal-dark); background:#fff; border-radius:999px;
+  .quick{border:1.5px solid var(--main); color:var(--main-dark); background:#fff; border-radius:999px;
     padding:7px 12px; font-size:.83rem; font-weight:700; cursor:pointer;}
-  .quick:hover{background:var(--teal-light);}
+  .quick:hover{background:var(--main-light);}
   .chat-input{display:flex; gap:8px; padding:11px; border-top:1px solid var(--line); background:#fff;}
   .chat-input input{flex:1; border:1.5px solid var(--line); border-radius:999px; padding:10px 14px; font-size:.95rem; outline:none; min-width:0;}
-  .chat-input input:focus{border-color:var(--teal);}
-  .chat-input button{background:var(--teal); color:#fff; border:none; border-radius:999px; padding:10px 16px; font-weight:700; cursor:pointer;}
-  .chat-input button:hover{background:var(--teal-dark);}
+  .chat-input input:focus{border-color:var(--main);}
+  .chat-input button{background:var(--main); color:#fff; border:none; border-radius:999px; padding:10px 16px; font-weight:700; cursor:pointer;}
+  .chat-input button:hover{background:var(--main-dark);}
   @media (max-width:560px){
     .chat-panel{right:0; bottom:0; width:100vw; max-width:100vw; height:100dvh; max-height:100dvh; border-radius:0;}
     .chat-bubble{right:16px; bottom:16px;}
@@ -152,16 +121,16 @@
 </head>
 <body>
 
-<div class="fiction-banner">⚠️ FICTIONAL DEMO — Magnolia Grove Dental is an invented business created to demonstrate an AI receptionist. <span>Not a real clinic; the address, phone number, staff, prices, and reviews are made up.</span></div>
+<div class="fiction-banner">⚠️ FICTIONAL DEMO — Magnolia Grove Dental is an invented business created to demonstrate an AI receptionist. <span>Not a real business; the address, phone number, staff, prices, and reviews are made up.</span></div>
 
 <div class="demo-bar">
   <label class="switch"><input type="checkbox" id="afterHoursToggle"> 🌙 Preview after-hours mode</label>
-  <span class="hint">Demo control — flip it to show how the receptionist behaves when the clinic is closed.</span>
+  <span class="hint">Demo control — flip it to show how the receptionist behaves when the business is closed.</span>
 </div>
 
 <header class="topbar">
   <div class="topbar-inner">
-    <div class="logo">🌸 Magnolia Grove Dental<small>Family &amp; Cosmetic Dentistry · Live Oak, FL</small></div>
+    <div class="logo">🌸 Magnolia Grove Dental<small>Family & Cosmetic Dentistry · Live Oak, FL</small></div>
     <div class="spacer"></div>
     <span class="status-pill" id="statusPill">Checking hours…</span>
     <a class="phone-link" href="tel:+13865550147">📞 (386) 555-0147</a>
@@ -183,13 +152,13 @@
     <h2>Our services</h2>
     <p class="section-sub">Straightforward care with honest “starting at” pricing — we always quote before any work begins.</p>
     <div class="grid">
-      <div class="card"><h3>🦷 Exams &amp; Cleanings</h3><p>Routine checkups and cleanings to keep small problems small.</p><span class="price">Cleaning from $99 · Exam from $79</span></div>
+      <div class="card"><h3>🦷 Exams & Cleanings</h3><p>Routine checkups and cleanings to keep small problems small.</p><span class="price">Cleaning from $99 · Exam from $79</span></div>
       <div class="card"><h3>🩻 Digital X-Rays</h3><p>Low-radiation digital imaging, included with new-patient exams.</p><span class="price">With exam from $79</span></div>
       <div class="card"><h3>🔩 Fillings</h3><p>Tooth-colored fillings, quoted exactly before treatment starts.</p><span class="price">From $150</span></div>
       <div class="card"><h3>👑 Crowns</h3><p>Natural-looking crowns by Dr. Bell, with payment plans available.</p><span class="price">From $950</span></div>
       <div class="card"><h3>🛠️ Root Canals</h3><p>Most root canals handled right here in the office.</p><span class="price">From $750</span></div>
       <div class="card"><h3>🦷 Extractions</h3><p>Gentle extractions when a tooth can’t be saved. Priced after your exam so there are no surprises.</p><span class="price">Quoted at exam</span></div>
-      <div class="card"><h3>😁 Dentures &amp; Partials</h3><p>Full and partial dentures fitted with extra time and care.</p><span class="price">From $1,100</span></div>
+      <div class="card"><h3>🦷 Dentures & Partials</h3><p>Full and partial dentures fitted with extra time and care.</p><span class="price">From $1,100</span></div>
       <div class="card"><h3>✨ Teeth Whitening</h3><p>Professional whitening — gentler on sensitive teeth than store kits.</p><span class="price">From $299</span></div>
       <div class="card"><h3>📐 Invisalign® Clear Aligners</h3><p>Straighten discreetly, with a free consult and payment plans.</p><span class="price">From $3,200</span></div>
       <div class="card"><h3>🚨 Emergency Dental Care</h3><p>Toothache, broken tooth, or worse — we hold same-day emergency slots every morning.</p><span class="price">Same-day slots daily</span></div>
@@ -227,7 +196,7 @@
     <h2>Meet the team</h2>
     <p class="section-sub">Small team, familiar faces.</p>
     <div class="team-grid">
-      <div class="card"><div class="avatar">ER</div><h3>Dr. Elena Ruiz, DDS</h3><p>Owner &amp; general dentist. Founded Magnolia Grove and believes every treatment should be explained in plain English first.</p></div>
+      <div class="card"><div class="avatar">ER</div><h3>Dr. Elena Ruiz, DDS</h3><p>Owner & general dentist. Founded Magnolia Grove and believes every treatment should be explained in plain English first.</p></div>
       <div class="card"><div class="avatar">MB</div><h3>Dr. Marcus Bell, DMD</h3><p>Associate dentist focusing on implants, crowns, and root canals — the steady hand for bigger work.</p></div>
       <div class="card"><div class="avatar">TC</div><h3>Tammy Collins, RDH</h3><p>Our hygienist, famous around town for making nervous patients — especially kids — completely comfortable.</p></div>
       <div class="card"><div class="avatar">JP</div><h3>Jess Parker</h3><p>Office manager and the voice of our front desk. Jess personally follows up on every message the chat assistant takes.</p></div>
@@ -235,8 +204,8 @@
   </section>
 
   <section id="reviews">
-    <h2>What patients say</h2>
-    <p class="section-sub">A few kind words from our (fictional) patients.</p>
+    <h2>What customers say</h2>
+    <p class="section-sub">A few kind words from our (fictional) customers.</p>
     <div class="reviews">
       <div class="card"><div class="stars">★★★★★</div><p>“They got me in the same morning with a toothache and had me out of pain by lunch. The evening hours are a lifesaver with my work schedule.”</p><div class="reviewer">— Sarah M.</div></div>
       <div class="card"><div class="stars">★★★★★</div><p>“Dr. Ruiz quoted everything up front and there were no surprises at checkout. First dentist I don’t dread visiting.”</p><div class="reviewer">— James T.</div></div>
@@ -244,19 +213,12 @@
     </div>
   </section>
 
-  <section id="insurance">
-    <div class="insurance">
-      <h2>Insurance &amp; payment</h2>
-      <p>We work with most major dental PPO plans and offer an in-house savings plan for patients without insurance. Payment plans are available on larger treatments — just ask at the front desk.</p>
-    </div>
-  </section>
-
   <section id="owner">
     <div class="panel owner-panel">
       <h2>👀 What the owner sees <span class="lead-count" id="leadCount">0 leads</span></h2>
-      <p>Every booking or message captured by the chat assistant appears here instantly. On a live client build, each lead lands in the owner’s email or a Google Sheet the second it happens — even at 2 AM.</p>
+      <p>Every booking or message captured by the chat assistant appears here instantly. On a live client build, each lead lands in the owner's email or a Google Sheet the second it happens — even at 2 AM.</p>
       <div id="leadList"></div>
-      <p class="lead-empty" id="leadEmpty">No leads yet — try the chat in the bottom-right corner and book a visit.</p>
+      <p class="lead-empty" id="leadEmpty">No leads yet — try the chat in the bottom-right corner.</p>
       <button class="clear-btn" id="clearLeads">Clear demo leads</button>
       <p class="owner-note">Demo note: leads are stored only in this browser (localStorage) for demonstration. Nothing is sent anywhere.</p>
     </div>
@@ -266,14 +228,13 @@
 <footer>
   <div class="footer-inner">
     <strong>Magnolia Grove Dental</strong> · 1214 Houston Ave, Live Oak, FL 32064 · (386) 555-0147<br>
-    Hours: Mon &amp; Wed 8–6 · Tue &amp; Thu 8–7 · Fri 8–4 · Sat by appointment · Sun closed
+    Hours: Mon & Wed 8–6 · Tue & Thu 8–7 · Fri 8–4 · Sat by appointment · Sun closed
     <div class="honest">Demo website built by Sebastian Burke — AI receptionist demo. Magnolia Grove Dental is a fictional business created for demonstration purposes.</div>
   </div>
 </footer>
 
-<!-- Chat widget -->
-<button class="chat-bubble" id="chatBubble" aria-label="Open chat with Magnolia Grove Dental">💬<span class="dot" id="bubbleDot"></span></button>
-<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Chat with Magnolia Grove Dental">
+<button class="chat-bubble" id="chatBubble" aria-label="Open chat">💬<span class="dot" id="bubbleDot"></span></button>
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Chat">
   <div class="chat-head">
     <div class="name">Magnolia Grove Dental</div>
     <div class="sub" id="chatSub">Typically replies instantly</div>
@@ -288,26 +249,12 @@
 
 <script>
 "use strict";
-/* ============================================================
-   Magnolia Grove Dental — demo AI receptionist
-   Rule-based intent matching over a fixed knowledge base.
-   In a paid client build, the single getAnswer() swap point
-   below is where an LLM endpoint would be called instead.
-   ============================================================ */
-
-/* ---------- Clinic hours (from spec) ----------
-   Index = JS getDay(): 0 Sun … 6 Sat. null = closed.
-   Saturday is "by appointment only" -> treated as closed
-   for walk-in hours. */
-const HOURS = {
-  0: null,                    // Sunday closed
-  1: { open: 8, close: 18 },  // Monday
-  2: { open: 8, close: 19 },  // Tuesday (evening)
-  3: { open: 8, close: 18 },  // Wednesday
-  4: { open: 8, close: 19 },  // Thursday (evening)
-  5: { open: 8, close: 16 },  // Friday
-  6: null                     // Saturday by appointment only
-};
+/* Demo AI receptionist — rule-based intent matching over a fixed knowledge
+   base. In a paid client build, the single getAnswer() swap point below is
+   where an LLM endpoint would be called instead. */
+const CONFIG = {"name": "Magnolia Grove Dental", "phone": "(386) 555-0147", "contactName": "Jess", "leadKey": "mgd_demo_leads", "hours": {"0": null, "1": [8, 18], "2": [8, 19], "3": [8, 18], "4": [8, 19], "5": [8, 16], "6": null}, "kb": [{"id": "hours", "phrases": ["what are your hours", "your hours", "when are you open", "opening hours", "hours of operation", "evening hours", "how late"], "keywords": ["hours", "open", "close", "closed", "late", "early"], "answer": "We're open Monday, Wednesday 8\u20136; Tuesday and Thursday 8\u20137 for evening appointments; Friday 8\u20134; and Saturday by appointment. We're closed Sundays."}, {"id": "location", "phrases": ["where are you located", "where are you", "your address", "how do i get there", "directions", "parking"], "keywords": ["located", "address", "parking", "directions", "wheelchair", "find you"], "answer": "We're at 1214 Houston Ave in Live Oak, right in town. There's free parking in the lot behind the building, and the entrance is fully wheelchair accessible."}, {"id": "phone", "phrases": ["phone number", "your number", "call you", "contact you"], "keywords": ["phone", "number", "call", "contact", "reach"], "answer": "You can reach the front desk at (386) 555-0147 during business hours \u2014 or just leave your number here and we'll call you."}, {"id": "weekend", "phrases": ["open on weekends", "weekend", "on saturday", "on sunday", "saturdays", "sundays"], "keywords": ["weekend", "saturday", "sunday"], "answer": "Saturdays are by appointment only, and we're closed Sundays. If something comes up over the weekend, leave a message here and you'll be first in our callback queue Monday morning."}, {"id": "cleaning-price", "phrases": ["how much is a cleaning", "cost of a cleaning", "cleaning cost", "cleaning price", "price of a cleaning"], "keywords": ["cleaning", "cleanings"], "answer": "A routine cleaning with exam starts at $99 for new patients. If it's been a while or you need a deeper cleaning, the dentist will quote it honestly before any work starts \u2014 no surprises."}, {"id": "exam-price", "phrases": ["exam and x-rays", "exam and x rays", "new patient exam", "how much is an exam", "x-rays", "x rays", "xray"], "keywords": ["exam", "xray", "x-ray", "x-rays", "checkup"], "answer": "Our new-patient exam with digital X-rays starts at $79. It's the best place to start if you're new or have a tooth that's bothering you."}, {"id": "filling-price", "phrases": ["how much does a filling cost", "filling cost", "how much is a filling", "fillings cost"], "keywords": ["filling", "fillings", "cavity"], "answer": "Fillings start at $150 depending on the tooth and size. After your exam, Dr. Ruiz will give you an exact price before treatment \u2014 we always quote first."}, {"id": "crown-price", "phrases": ["how much is a crown", "crown cost", "cost of a crown", "crowns cost"], "keywords": ["crown", "crowns"], "answer": "Crowns start at $950. We offer payment plans on larger treatments, so just ask and we'll walk you through options."}, {"id": "root-canal", "phrases": ["root canal", "root canals", "do you do root"], "keywords": ["root", "canal", "canals"], "answer": "Yes, Dr. Bell handles most root canals right here in the office, starting at $750. If your case needs a specialist, we'll refer you and help coordinate it."}, {"id": "whitening", "phrases": ["teeth whitening", "whitening", "whiten my teeth", "bleaching"], "keywords": ["whitening", "whiten", "bleach"], "answer": "We do! Professional whitening starts at $299, and it's much gentler on sensitive teeth than store kits. Want me to help you book a whitening consult?"}, {"id": "invisalign", "phrases": ["invisalign", "clear aligners", "aligners", "straighten"], "keywords": ["invisalign", "aligners", "braces", "straighten"], "answer": "Yes \u2014 Invisalign clear aligners start at $3,200 with payment plans available. The first step is a free consult to check you're a good candidate."}, {"id": "dentures", "phrases": ["dentures", "denture", "partials", "partial denture"], "keywords": ["denture", "dentures", "partials"], "answer": "We do full and partial dentures, starting at $1,100. Dr. Ruiz takes extra time on fit \u2014 most patients need a couple of short visits."}, {"id": "kids", "phrases": ["see kids", "see children", "children", "kids", "child", "my son", "my daughter", "pediatric"], "keywords": ["kids", "children", "child", "son", "daughter"], "answer": "Absolutely \u2014 we see children ages 4 and up, and Tammy, our hygienist, is famous for making nervous little ones comfortable. Kids' cleanings start at $69."}, {"id": "book", "phrases": ["how do i book", "how to book", "book an appointment", "make an appointment", "schedule an appointment", "how do i schedule"], "keywords": ["book", "booking", "appointment", "schedule", "appointments"], "answer": "Easy \u2014 just tell me your name, your phone number, and what you need, and our front desk will call you to confirm a time. Want to do that now?"}, {"id": "same-day", "phrases": ["same-day", "same day", "today", "urgent appointment", "get in today", "asap"], "keywords": ["today", "urgent", "asap"], "answer": "We hold a few same-day slots every morning for urgent problems \u2014 they go fast. Leave your details here and you'll be first to hear if one's open."}, {"id": "reschedule", "phrases": ["reschedule", "cancel", "change my appointment", "move my appointment"], "keywords": ["reschedule", "cancel", "change"], "answer": "No problem \u2014 call us at (386) 555-0147, or leave a message here with your new preferred time and we'll sort it out. We just ask for 24 hours' notice when you can."}, {"id": "first-visit", "phrases": ["first visit", "bring to", "what should i bring", "new patient form", "first appointment"], "keywords": ["bring", "first", "visit", "form"], "answer": "Just a photo ID and your insurance card if you have one. Arrive about 10 minutes early for a short new-patient form \u2014 or I can take your details right here to save time."}, {"id": "cleaning-length", "phrases": ["how long does a cleaning take", "how long is a cleaning", "long does it take", "cleaning take"], "keywords": ["long", "take", "duration"], "answer": "Most cleanings take about 45 minutes to an hour. If you come on a lunch break, let us know and we'll keep you on schedule."}, {"id": "insurance", "phrases": ["do you take my insurance", "take insurance", "accept insurance", "my insurance", "insurance plan", "ppo", "do you take"], "keywords": ["insurance", "ppo", "coverage", "insurer", "delta", "cigna", "metlife", "guardian", "aetna"], "answer": "We work with most major dental PPO plans. Every plan is a little different, so the surest way is to leave your insurer's name and we'll verify your coverage before your visit \u2014 no obligation."}, {"id": "no-insurance", "phrases": ["don't have insurance", "do not have insurance", "no insurance", "without insurance", "uninsured", "savings plan"], "keywords": ["uninsured", "savings"], "answer": "Of course \u2014 plenty of our patients don't. Our new-patient exam starts at $79, and we have an in-house savings plan that takes 15% off most treatments for members."}, {"id": "payment-plans", "phrases": ["payment plan", "payment plans", "pay monthly", "monthly payments", "financing", "split the cost"], "keywords": ["payment", "payments", "monthly", "financing", "finance"], "answer": "Yes, on treatments like crowns, root canals, and Invisalign we can split the cost into monthly payments. Jess at the front desk will lay out the options before anything is scheduled."}, {"id": "payment-forms", "phrases": ["forms of payment", "how can i pay", "credit card", "debit", "hsa", "fsa", "checks", "accept payment"], "keywords": ["pay", "card", "cards", "hsa", "fsa", "check", "checks", "cash"], "answer": "Cash, all major credit and debit cards, and most HSA/FSA cards. We don't accept personal checks for first visits."}, {"id": "toothache", "phrases": ["toothache", "tooth ache", "tooth hurts", "tooth pain", "my tooth", "hurting tooth", "aching"], "keywords": ["toothache", "ache", "hurts", "hurt", "pain", "aching"], "answer": "I'm sorry you're hurting. We hold same-day emergency slots every morning \u2014 leave your name and number now and the team will call you as soon as we open. Meanwhile, an over-the-counter pain reliever as directed and a cold compress can help."}, {"id": "broken-tooth", "phrases": ["broke a tooth", "broken tooth", "chipped", "cracked tooth", "broke my tooth", "chip"], "keywords": ["broke", "broken", "chipped", "cracked", "chip"], "answer": "Don't panic \u2014 save any pieces if you can, rinse gently with warm water, and get in touch right away. Broken teeth are exactly what our morning emergency slots are for, so leave your details and we'll call first thing."}, {"id": "knocked-out", "phrases": ["knocked out", "knocked my tooth", "tooth fell out", "tooth came out", "lost a tooth"], "keywords": ["knocked", "fell out", "came out"], "answer": "This one's time-sensitive: pick the tooth up by the crown (not the root), rinse it briefly without scrubbing, and if you can, place it back in the socket \u2014 or keep it in milk. Then call us immediately at (386) 555-0147; if we're closed, head to urgent care or the ER and leave a message here too."}, {"id": "after-hours-pain", "phrases": ["after hours", "in pain", "severe pain", "swelling", "can't sleep", "cant sleep"], "keywords": ["pain", "swelling", "fever", "emergency"], "answer": "I'm so sorry \u2014 the office is closed right now, but leave your name, number, and what's going on, and you'll be the first call when we open at [NEXT_OPENING]. If you have swelling that's spreading, trouble breathing or swallowing, or a fever with tooth pain, please go to the ER tonight rather than waiting."}, {"id": "dentists", "phrases": ["who are the dentists", "the dentists", "dr ruiz", "dr bell", "your dentists", "who is the dentist"], "keywords": ["dentist", "dentists", "ruiz", "bell", "doctor"], "answer": "Dr. Elena Ruiz founded Magnolia Grove and handles general and family dentistry; Dr. Marcus Bell focuses on crowns, implants, and root canals. Patients love that they explain everything in plain English before starting."}, {"id": "nervous", "phrases": ["nervous", "scared", "afraid", "anxious", "anxiety", "fear", "dental anxiety"], "keywords": ["nervous", "scared", "afraid", "anxious", "anxiety", "fear"], "answer": "You're not alone \u2014 that's one of the most common things we hear. The team goes at your pace, explains each step, and can take breaks whenever you need. Mention it when you book and we'll note it on your appointment."}, {"id": "new-patients", "phrases": ["accepting new patients", "new patients", "taking new", "accept new"], "keywords": ["new", "patients", "accepting"], "answer": "Yes, we're glad to be! New-patient exams start at $79 including X-rays. Want me to help you get set up?"}, {"id": "spanish", "phrases": ["spanish", "espa\u00f1ol", "espanol", "habla", "speak spanish"], "keywords": ["spanish", "espanol", "espa\u00f1ol"], "answer": "That's a great question \u2014 I don't want to guess on that one. I can take a message and have Jess call you back with the answer, or you can reach us at (386) 555-0147. Want me to take a message?"}], "quickReplies": [{"label": "\ud83d\udcc5 Book an appointment", "kind": "book"}, {"label": "\ud83d\udd50 Hours & location", "kind": "hours"}, {"label": "\ud83e\uddb7 Services & prices", "kind": "services"}, {"label": "\ud83d\udcb3 Insurance & payment", "kind": "kb_multi", "targets": ["insurance", "payment-plans"]}, {"label": "\ud83d\udea8 I have a dental emergency", "kind": "urgent"}], "urgentMenu": [{"label": "\ud83d\ude23 Toothache", "id": "toothache"}, {"label": "\ud83e\uddb7 Broken / chipped tooth", "id": "broken-tooth", "pattern": "(broke|broken|chipped|cracked)[^.!?]{0,40}(tooth|teeth)|(tooth|teeth)[^.!?]{0,40}(broke|broken|chipped|cracked)"}, {"label": "\u203c\ufe0f Knocked-out tooth", "id": "knocked-out", "pattern": "knocked out|tooth fell out|tooth came out"}, {"label": "\ud83c\udf19 Pain after hours", "id": "after-hours-pain"}], "urgentIds": ["toothache", "broken-tooth", "knocked-out", "after-hours-pain"], "bookOfferIds": ["book", "new-patients", "whitening", "same-day"], "servicesSummary": "Here's what we do, with honest starting-at pricing: cleanings from $99 \u00b7 new-patient exam + X-rays from $79 \u00b7 fillings from $150 \u00b7 crowns from $950 \u00b7 root canals from $750 \u00b7 whitening from $299 \u00b7 Invisalign from $3,200 \u00b7 dentures from $1,100 \u00b7 kids' cleanings from $69. We also do extractions and same-day emergency care.", "greetingHint": "I can answer questions about hours, services, and prices, or help you book a visit. What can I do for you?", "urgentIntro": "I'm sorry you're dealing with that \u2014 let's get you the right guidance fast. What's going on?", "messageOfferIds": ["spanish"]};
+const HOURS = CONFIG.hours;   // JS getDay(): 0 Sun … 6 Sat; null = closed
+const KB = CONFIG.kb;
 const DAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 let forceAfterHours = false;
 
@@ -322,9 +269,8 @@ function isOpenNow(now){
   const h = HOURS[now.getDay()];
   if (!h) return false;
   const t = now.getHours() + now.getMinutes() / 60;
-  return t >= h.open && t < h.close;
+  return t >= h[0] && t < h[1];
 }
-/* Human phrase for the next opening, e.g. "tomorrow at 8:00 AM" */
 function nextOpeningPhrase(now){
   now = now || new Date();
   for (let add = 0; add < 8; add++){
@@ -333,139 +279,79 @@ function nextOpeningPhrase(now){
     if (!h) continue;
     if (add === 0){
       const t = now.getHours() + now.getMinutes() / 60;
-      if (t >= h.open) continue; // already opened today; find the next one
+      if (t >= h[0]) continue;
     }
     const when = add === 0 ? "today" : add === 1 ? "tomorrow" : DAY_NAMES[d.getDay()];
-    return when + " at " + fmtHour(h.open);
+    return when + " at " + fmtHour(h[0]);
   }
   return "Monday at 8:00 AM";
 }
 function closePhrase(now){
   const h = HOURS[now.getDay()];
-  return h ? "Open now · until " + fmtHour(h.close) : "";
+  return h ? "Open now · until " + fmtHour(h[1]) : "";
 }
-
-/* ---------- Knowledge base: the spec's 30 Q&A pairs, verbatim ----------
-   Each entry: id, trigger phrases (strong), keywords (weak), answer. */
-const KB = [
-  { id:"hours", phrases:["what are your hours","your hours","when are you open","opening hours","hours of operation","evening hours","how late"],
-    keywords:["hours","open","close","closed","late","early"],
-    answer:"We're open Monday, Wednesday 8–6; Tuesday and Thursday 8–7 for evening appointments; Friday 8–4; and Saturday by appointment. We're closed Sundays." },
-  { id:"location", phrases:["where are you located","where are you","your address","how do i get there","directions","parking"],
-    keywords:["located","address","parking","directions","wheelchair","find you"],
-    answer:"We're at 1214 Houston Ave in Live Oak, right in town. There's free parking in the lot behind the building, and the entrance is fully wheelchair accessible." },
-  { id:"phone", phrases:["phone number","your number","call you","contact you"],
-    keywords:["phone","number","call","contact","reach"],
-    answer:"You can reach the front desk at (386) 555-0147 during business hours — or just leave your number here and we'll call you." },
-  { id:"weekend", phrases:["open on weekends","weekend","on saturday","on sunday","saturdays","sundays"],
-    keywords:["weekend","saturday","sunday"],
-    answer:"Saturdays are by appointment only, and we're closed Sundays. If something comes up over the weekend, leave a message here and you'll be first in our callback queue Monday morning." },
-  { id:"cleaning-price", phrases:["how much is a cleaning","cost of a cleaning","cleaning cost","cleaning price","price of a cleaning"],
-    keywords:["cleaning","cleanings"],
-    answer:"A routine cleaning with exam starts at $99 for new patients. If it's been a while or you need a deeper cleaning, the dentist will quote it honestly before any work starts — no surprises." },
-  { id:"exam-price", phrases:["exam and x-rays","exam and x rays","new patient exam","how much is an exam","x-rays","x rays","xray"],
-    keywords:["exam","xray","x-ray","x-rays","checkup"],
-    answer:"Our new-patient exam with digital X-rays starts at $79. It's the best place to start if you're new or have a tooth that's bothering you." },
-  { id:"filling-price", phrases:["how much does a filling cost","filling cost","how much is a filling","fillings cost"],
-    keywords:["filling","fillings","cavity"],
-    answer:"Fillings start at $150 depending on the tooth and size. After your exam, Dr. Ruiz will give you an exact price before treatment — we always quote first." },
-  { id:"crown-price", phrases:["how much is a crown","crown cost","cost of a crown","crowns cost"],
-    keywords:["crown","crowns"],
-    answer:"Crowns start at $950. We offer payment plans on larger treatments, so just ask and we'll walk you through options." },
-  { id:"root-canal", phrases:["root canal","root canals","do you do root"],
-    keywords:["root","canal","canals"],
-    answer:"Yes, Dr. Bell handles most root canals right here in the office, starting at $750. If your case needs a specialist, we'll refer you and help coordinate it." },
-  { id:"whitening", phrases:["teeth whitening","whitening","whiten my teeth","bleaching"],
-    keywords:["whitening","whiten","bleach"],
-    answer:"We do! Professional whitening starts at $299, and it's much gentler on sensitive teeth than store kits. Want me to help you book a whitening consult?" },
-  { id:"invisalign", phrases:["invisalign","clear aligners","aligners","straighten"],
-    keywords:["invisalign","aligners","braces","straighten"],
-    answer:"Yes — Invisalign clear aligners start at $3,200 with payment plans available. The first step is a free consult to check you're a good candidate." },
-  { id:"dentures", phrases:["dentures","denture","partials","partial denture"],
-    keywords:["denture","dentures","partials"],
-    answer:"We do full and partial dentures, starting at $1,100. Dr. Ruiz takes extra time on fit — most patients need a couple of short visits." },
-  { id:"kids", phrases:["see kids","see children","children","kids","child","my son","my daughter","pediatric"],
-    keywords:["kids","children","child","son","daughter"],
-    answer:"Absolutely — we see children ages 4 and up, and Tammy, our hygienist, is famous for making nervous little ones comfortable. Kids' cleanings start at $69." },
-  { id:"book", phrases:["how do i book","how to book","book an appointment","make an appointment","schedule an appointment","how do i schedule"],
-    keywords:["book","booking","appointment","schedule","appointments"],
-    answer:"Easy — just tell me your name, your phone number, and what you need, and our front desk will call you to confirm a time. Want to do that now?" },
-  { id:"same-day", phrases:["same-day","same day","today","urgent appointment","get in today","asap"],
-    keywords:["today","urgent","asap"],
-    answer:"We hold a few same-day slots every morning for urgent problems — they go fast. Leave your details here and you'll be first to hear if one's open." },
-  { id:"reschedule", phrases:["reschedule","cancel","change my appointment","move my appointment"],
-    keywords:["reschedule","cancel","change"],
-    answer:"No problem — call us at (386) 555-0147, or leave a message here with your new preferred time and we'll sort it out. We just ask for 24 hours' notice when you can." },
-  { id:"first-visit", phrases:["first visit","bring to","what should i bring","new patient form","first appointment"],
-    keywords:["bring","first","visit","form"],
-    answer:"Just a photo ID and your insurance card if you have one. Arrive about 10 minutes early for a short new-patient form — or I can take your details right here to save time." },
-  { id:"cleaning-length", phrases:["how long does a cleaning take","how long is a cleaning","long does it take","cleaning take"],
-    keywords:["long","take","duration"],
-    answer:"Most cleanings take about 45 minutes to an hour. If you come on a lunch break, let us know and we'll keep you on schedule." },
-  { id:"insurance", phrases:["do you take my insurance","take insurance","accept insurance","my insurance","insurance plan","ppo","do you take"],
-    keywords:["insurance","ppo","coverage","insurer","delta","cigna","metlife","guardian","aetna"],
-    answer:"We work with most major dental PPO plans. Every plan is a little different, so the surest way is to leave your insurer's name and we'll verify your coverage before your visit — no obligation." },
-  { id:"no-insurance", phrases:["don't have insurance","do not have insurance","no insurance","without insurance","uninsured","savings plan"],
-    keywords:["uninsured","savings"],
-    answer:"Of course — plenty of our patients don't. Our new-patient exam starts at $79, and we have an in-house savings plan that takes 15% off most treatments for members." },
-  { id:"payment-plans", phrases:["payment plan","payment plans","pay monthly","monthly payments","financing","split the cost"],
-    keywords:["payment","payments","monthly","financing","finance"],
-    answer:"Yes, on treatments like crowns, root canals, and Invisalign we can split the cost into monthly payments. Jess at the front desk will lay out the options before anything is scheduled." },
-  { id:"payment-forms", phrases:["forms of payment","how can i pay","credit card","debit","hsa","fsa","checks","accept payment"],
-    keywords:["pay","card","cards","hsa","fsa","check","checks","cash"],
-    answer:"Cash, all major credit and debit cards, and most HSA/FSA cards. We don't accept personal checks for first visits." },
-  { id:"toothache", phrases:["toothache","tooth ache","tooth hurts","tooth pain","my tooth","hurting tooth","aching"],
-    keywords:["toothache","ache","hurts","hurt","pain","aching"],
-    answer:"I'm sorry you're hurting. We hold same-day emergency slots every morning — leave your name and number now and the team will call you as soon as we open. Meanwhile, an over-the-counter pain reliever as directed and a cold compress can help." },
-  { id:"broken-tooth", phrases:["broke a tooth","broken tooth","chipped","cracked tooth","broke my tooth","chip"],
-    keywords:["broke","broken","chipped","cracked","chip"],
-    answer:"Don't panic — save any pieces if you can, rinse gently with warm water, and get in touch right away. Broken teeth are exactly what our morning emergency slots are for, so leave your details and we'll call first thing." },
-  { id:"knocked-out", phrases:["knocked out","knocked my tooth","tooth fell out","tooth came out","lost a tooth"],
-    keywords:["knocked","fell out","came out"],
-    answer:"This one's time-sensitive: pick the tooth up by the crown (not the root), rinse it briefly without scrubbing, and if you can, place it back in the socket — or keep it in milk. Then call us immediately at (386) 555-0147; if we're closed, head to urgent care or the ER and leave a message here too." },
-  { id:"after-hours-pain", phrases:["after hours","in pain","severe pain","swelling","can't sleep","cant sleep"],
-    keywords:["pain","swelling","fever","emergency"],
-    answer:"I'm so sorry — the office is closed right now, but leave your name, number, and what's going on, and you'll be the first call when we open at [NEXT_OPENING]. If you have swelling that's spreading, trouble breathing or swallowing, or a fever with tooth pain, please go to the ER tonight rather than waiting." },
-  { id:"dentists", phrases:["who are the dentists","the dentists","dr ruiz","dr bell","your dentists","who is the dentist"],
-    keywords:["dentist","dentists","ruiz","bell","doctor"],
-    answer:"Dr. Elena Ruiz founded Magnolia Grove and handles general and family dentistry; Dr. Marcus Bell focuses on crowns, implants, and root canals. Patients love that they explain everything in plain English before starting." },
-  { id:"nervous", phrases:["nervous","scared","afraid","anxious","anxiety","fear","dental anxiety"],
-    keywords:["nervous","scared","afraid","anxious","anxiety","fear"],
-    answer:"You're not alone — that's one of the most common things we hear. The team goes at your pace, explains each step, and can take breaks whenever you need. Mention it when you book and we'll note it on your appointment." },
-  { id:"new-patients", phrases:["accepting new patients","new patients","taking new","accept new"],
-    keywords:["new","patients","accepting"],
-    answer:"Yes, we're glad to be! New-patient exams start at $79 including X-rays. Want me to help you get set up?" },
-  { id:"spanish", phrases:["spanish","español","espanol","habla","speak spanish"],
-    keywords:["spanish","espanol","español"],
-    answer:"That's a great question — I don't want to guess on that one. I can take a message and have Jess call you back with the answer, or you can reach us at (386) 555-0147. Want me to take a message?" }
-];
-
-const FALLBACK = "That's a great question — I don't want to guess on that one. I can take a message and have Jess call you back with the answer, or you can reach us at (386) 555-0147. Want me to take a message?";
-const HUMAN_ANSWER = "I'm the clinic's automated assistant — I handle quick questions and messages, and the team follows up personally.";
-const GREETING_OPEN = "Hi there! 👋 You're chatting with the front desk at Magnolia Grove Dental. I can answer questions about hours, services, and prices, or help you book a visit. What can I do for you?";
+function fallbackText(){
+  return "Sorry, I didn't quite catch that — I only know the answers " + CONFIG.name + " gave me, so I won't guess. I can take a message for " + CONFIG.contactName + " to call you back, or you can reach us at " + CONFIG.phone + ". Or try one of these:";
+}
+function humanText(){
+  return "I'm this business's automated assistant — I handle quick questions and messages, and the team follows up personally.";
+}
+function greetingOpen(){
+  return "Hi there! 👋 You're chatting with the front desk at " + CONFIG.name + ". " + CONFIG.greetingHint;
+}
 function greetingClosed(){
-  return "Hi! Magnolia Grove Dental is closed right now — we reopen " + nextOpeningPhrase() + ". I'm the after-hours assistant: I can answer quick questions and take messages so the team can call you back when we open.";
+  return "Hi! " + CONFIG.name + " is closed right now — we reopen " + nextOpeningPhrase() + ". I'm the after-hours assistant: I can answer quick questions and take messages so the team can call you back when we open.";
 }
-
-/* ---------- Intent matching ---------- */
 function normalize(text){
   return " " + text.toLowerCase().replace(/[^a-z0-9áéíóúñ\s]/g, " ").replace(/\s+/g, " ").trim() + " ";
+}
+function damerau(a, b){
+  const m = a.length, n = b.length, d = [];
+  for (let i = 0; i <= m; i++){ d[i] = [i]; }
+  for (let j = 0; j <= n; j++){ d[0][j] = j; }
+  for (let i = 1; i <= m; i++){
+    for (let j = 1; j <= n; j++){
+      const cost = a[i-1] === b[j-1] ? 0 : 1;
+      d[i][j] = Math.min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + cost);
+      if (i > 1 && j > 1 && a[i-1] === b[j-2] && a[i-2] === b[j-1]) d[i][j] = Math.min(d[i][j], d[i-2][j-2] + 1);
+    }
+  }
+  return d[m][n];
+}
+// True when a keyword is one small typo away from a word the visitor typed.
+// Same first letter, 4+ letters, 1 edit (2 for long words): catches "whitenig",
+// "apointment", "cleanin" without letting unrelated words match.
+function fuzzyHit(keyword, part){
+  if (keyword.includes(" ") || keyword.length < 4) return false;
+  const words = part.split(" ").filter(Boolean);
+  const maxDist = keyword.length >= 8 ? 2 : 1;
+  for (const w of words){
+    if (w.length < 4 || w[0] !== keyword[0]) continue;
+    if (damerau(w, keyword) <= maxDist) return true;
+  }
+  return false;
 }
 function scoreEntry(entry, part){
   let score = 0;
   for (const p of entry.phrases){ if (part.includes(" " + p) || part.includes(p + " ") || part.trim() === p) score += 3; }
-  for (const k of entry.keywords){ if (part.includes(" " + k + " ") || part.includes(" " + k)) score += 1; }
+  for (const k of entry.keywords){
+    if (part.includes(" " + k + " ") || part.includes(" " + k)) score += 1;
+    else if (fuzzyHit(k, part)) score += 2;
+  }
   return score;
 }
 /* The LLM swap point: in a paid build this calls the client endpoint instead. */
 function getAnswer(userText, kb){
   const norm = normalize(userText);
-  // "Are you human / a robot?" — tone rule: never claim to be human.
   if (/\b(human|robot|real person|bot|ai|actual person)\b/.test(norm) &&
       /\b(are you|you a|you an|am i talking)\b/.test(norm)) {
-    return { answers: [HUMAN_ANSWER], ids: ["human"] };
+    return { answers: [humanText()], ids: ["human"] };
   }
-  // Split multi-part questions on "?" and " and ", answer up to two intents.
+  const GREETING_WORDS = new Set(["hi","hii","hello","hey","heyy","heyyy","helloo","yo","sup","howdy","hiya","good","morning","afternoon","evening","there","whats","up","how","are","you","doing","folks","everyone"]);
+  const tokens = norm.trim().split(/\s+/).filter(Boolean);
+  if (tokens.length && tokens.every(t => GREETING_WORDS.has(t))){
+    return { answers: [isOpenNow() ? greetingOpen() : greetingClosed()], ids: ["greeting"] };
+  }
   const raw = userText.toLowerCase();
   let parts = raw.split("?").map(s => s.trim()).filter(Boolean);
   let expanded = [];
@@ -489,21 +375,15 @@ function getAnswer(userText, kb){
       if (found.length >= 2) break;
     }
   }
-  if (!found.length) return { answers: [FALLBACK], ids: ["fallback"] };
+  if (!found.length) return { answers: [fallbackText()], ids: ["fallback"] };
   return { answers: found.map(e => fillDynamic(e.answer)), ids: found.map(e => e.id) };
 }
 function fillDynamic(text){
   return text.replace("[NEXT_OPENING]", nextOpeningPhrase());
 }
 
-/* ---------- Chat state ---------- */
-const msgsEl = document.getElementById("chatMsgs");
-const quickEl = document.getElementById("quickRow");
-const inputEl = document.getElementById("chatText");
-let greeted = false;
-let leadFlow = null;   // { step: "name"|"phone"|"need", name, phone, need, prefillNeed }
-let pendingOffer = null; // "book" | "message" when bot asked a yes/no offer
-
+/* ---------- Chat UI (browser only) ---------- */
+let msgsEl, quickEl, inputEl, greeted = false, leadFlow = null, pendingOffer = null, pendingOfferText = null;
 function addMsg(text, who){
   const d = document.createElement("div");
   d.className = "msg " + who;
@@ -516,7 +396,6 @@ function addMsg(text, who){
 }
 function addSys(text){ addMsg(text, "sys"); }
 function botSay(text){ addMsg(text, "bot"); }
-
 function setQuickButtons(list){
   quickEl.innerHTML = "";
   for (const b of list){
@@ -528,39 +407,34 @@ function setQuickButtons(list){
     quickEl.appendChild(btn);
   }
 }
+function kbAnswer(id){
+  const e = KB.find(x => x.id === id);
+  return e ? fillDynamic(e.answer) : fallbackText();
+}
+function quickAction(q){
+  if (q.kind === "book"){ addMsg(q.label, "user"); startLead("booking"); }
+  else if (q.kind === "services"){ addMsg(q.label, "user"); botSay(CONFIG.servicesSummary); botSay("Want details on any of those — or shall I help you book?"); afterAnswer(); }
+  else if (q.kind === "hours"){ addMsg(q.label, "user"); botSay(kbAnswer("hours")); botSay(kbAnswer("location")); afterAnswer(); }
+  else if (q.kind === "urgent"){ addMsg(q.label, "user"); urgentMenu(); }
+  else if (q.kind === "kb"){ addMsg(q.label, "user"); botSay(kbAnswer(q.target)); afterAnswer(); }
+  else if (q.kind === "kb_multi"){ addMsg(q.label, "user"); for (const t of q.targets) botSay(kbAnswer(t)); afterAnswer(); }
+}
 function mainQuick(){
-  setQuickButtons([
-    { label: "📅 Book an appointment", action: () => { addMsg("📅 Book an appointment", "user"); startLead("booking"); } },
-    { label: "🕐 Hours & location", action: () => { addMsg("🕐 Hours & location", "user"); botSay(fillDynamic(KB[0].answer)); botSay(fillDynamic(KB[1].answer)); afterAnswer(); } },
-    { label: "🦷 Services & prices", action: () => { addMsg("🦷 Services & prices", "user"); servicesAnswer(); } },
-    { label: "💳 Insurance & payment", action: () => { addMsg("💳 Insurance & payment", "user"); botSay(fillDynamic(KB[18].answer)); botSay(fillDynamic(KB[20].answer)); afterAnswer(); } },
-    { label: "🚨 I have a dental emergency", action: () => { addMsg("🚨 I have a dental emergency", "user"); emergencyMenu(); } }
-  ]);
+  setQuickButtons(CONFIG.quickReplies.map(q => ({ label: q.label, action: () => quickAction(q) })));
 }
-function servicesAnswer(){
-  botSay("Here's what we do, with honest starting-at pricing: cleanings from $99 · new-patient exam + X-rays from $79 · fillings from $150 · crowns from $950 · root canals from $750 · whitening from $299 · Invisalign from $3,200 · dentures from $1,100 · kids' cleanings from $69. We also do extractions and same-day emergency care.");
-  botSay("Want details on any of those — or shall I help you book?");
-  afterAnswer();
+function urgentMenu(){
+  botSay(CONFIG.urgentIntro);
+  setQuickButtons(CONFIG.urgentMenu.map(u => ({ label: u.label, action: () => urgentAnswer(u.id) })));
 }
-function emergencyMenu(){
-  botSay("I'm sorry you're dealing with that — let's get you the right guidance fast. What's going on?");
-  setQuickButtons([
-    { label: "😣 Toothache", action: () => emergencyAnswer("toothache") },
-    { label: "🦷 Broken / chipped tooth", action: () => emergencyAnswer("broken-tooth") },
-    { label: "‼️ Knocked-out tooth", action: () => emergencyAnswer("knocked-out") },
-    { label: "🌙 Pain after hours", action: () => emergencyAnswer("after-hours-pain") }
-  ]);
-}
-function emergencyAnswer(id){
-  const entry = KB.find(e => e.id === id);
-  if (entry) botSay(fillDynamic(entry.answer));
+function urgentAnswer(id){
+  botSay(kbAnswer(id));
   if (!isOpenNow()){
     botSay("Since we're closed right now, leave your details and you'll be first in the callback queue when we open " + nextOpeningPhrase() + ".");
   } else {
-    botSay("Leave your details here and the team will call you as soon as they can — usually within the hour during business hours.");
+    botSay("Leave your details here and the team will get back to you as soon as they can — usually within the hour during business hours.");
   }
   setQuickButtons([
-    { label: "📝 Take my details", action: () => startLead("emergency") },
+    { label: "📝 Take my details", action: () => startLead("urgent") },
     { label: "↩️ Back to main menu", action: () => { botSay("Of course — what else can I do for you?"); mainQuick(); } }
   ]);
 }
@@ -570,19 +444,13 @@ function afterAnswer(){
   }
   mainQuick();
 }
-
-/* ---------- Lead capture state machine ---------- */
 function startLead(reason, prefillNeed){
   leadFlow = { step: "name", name: "", phone: "", need: "", reason: reason || "booking" };
   pendingOffer = null;
   setQuickButtons([]);
-  if (reason === "message"){
-    botSay("Of course — I'll take a message for Jess. What's your first name?");
-  } else if (reason === "emergency"){
-    botSay("Let's get you in the callback queue. What's your first name?");
-  } else {
-    botSay("I can help with that! What's your first name?");
-  }
+  if (reason === "message") botSay("Of course — I'll take a message for " + CONFIG.contactName + ". What's your first name?");
+  else if (reason === "urgent") botSay("Let's get you in the callback queue. What's your first name?");
+  else botSay("I can help with that! What's your first name?");
   if (prefillNeed) leadFlow.prefillNeed = prefillNeed;
   inputEl.focus();
 }
@@ -595,7 +463,7 @@ function leadStep(text){
     return;
   }
   if (leadFlow.step === "name"){
-    leadFlow.name = t.split(/\s+/)[0].replace(/[^A-Za-zÀ-ÿ'-]/g, "") || t;
+    leadFlow.name = t.split(/\s+/)[0].replace(/[^A-Za-z'-]/g, "") || t;
     leadFlow.step = "phone";
     botSay("Thanks, " + leadFlow.name + ". What's the best phone number to reach you?");
     return;
@@ -611,7 +479,7 @@ function leadStep(text){
     if (leadFlow.prefillNeed){
       botSay("And in a few words, anything you'd like to add? Your question was: “" + leadFlow.prefillNeed + "” — or just say “that's it.”");
     } else {
-      botSay("And in a few words, what do you need — cleaning, a tooth that's hurting, something else?");
+      botSay("And in a few words, what do you need?");
     }
     return;
   }
@@ -625,25 +493,20 @@ function leadStep(text){
   }
 }
 function finishLead(){
-  const lead = {
-    name: leadFlow.name, phone: leadFlow.phone, need: leadFlow.need,
-    reason: leadFlow.reason, afterHours: !isOpenNow(),
-    time: new Date().toISOString()
-  };
+  const lead = { name: leadFlow.name, phone: leadFlow.phone, need: leadFlow.need,
+    reason: leadFlow.reason, afterHours: !isOpenNow(), time: new Date().toISOString() };
   saveLead(lead);
   const name = leadFlow.name, phone = leadFlow.phone;
   leadFlow = null;
   if (!isOpenNow()){
-    botSay("You're all set, " + name + "! I've passed this to Jess at our front desk. We're closed right now, so you'll be first in the callback queue — we'll call you at " + phone + " as soon as we reopen " + nextOpeningPhrase() + ". Anything else I can help with?");
+    botSay("You're all set, " + name + "! I've passed this to " + CONFIG.contactName + ". We're closed right now, so you'll be first in the callback queue — we'll call you at " + phone + " as soon as we reopen " + nextOpeningPhrase() + ". Anything else I can help with?");
   } else {
-    botSay("You're all set, " + name + "! I've passed this to Jess at our front desk. We'll call you at " + phone + " during business hours to confirm a time — usually within the hour. Anything else I can help with?");
+    botSay("You're all set, " + name + "! I've passed this to " + CONFIG.contactName + ". We'll call you at " + phone + " during business hours to confirm — usually within the hour. Anything else I can help with?");
   }
-  addSys("✅ Lead sent to the front desk — see the “What the owner sees” panel on this page.");
+  addSys("✅ Lead sent — see the “What the owner sees” panel on this page.");
   mainQuick();
 }
-
-/* ---------- Free-text handling ---------- */
-const BOOK_REQUEST = /\b(book|schedule|make|set up|need|want|get)\b[^.!?]{0,30}\b(appointment|appt|visit|cleaning|consult)\b|\bbook me\b|\bi want to book\b|\bplease book\b/;
+const BOOK_REQUEST = /\b(book|schedule|make|set up|need|want|get)\b[^.!?]{0,30}\b(appointment|appt|visit|service|reservation|table|cut|booking|cleaning|consult|exam|checkup)\b|\bbook me\b|\bi want to book\b|\bplease book\b/;
 function handleUserText(text){
   addMsg(text, "user");
   if (leadFlow){ leadStep(text); return; }
@@ -660,29 +523,28 @@ function handleUserText(text){
       mainQuick();
       return;
     }
-    pendingOffer = null; // treat as a fresh question
+    pendingOffer = null;
   }
-  // Direct booking requests start lead capture.
   if (BOOK_REQUEST.test(text.toLowerCase()) && !/how|what|where|when/.test(norm)){
     startLead("booking");
     return;
   }
-  // Emergency keywords route straight to the emergency answers.
-  if (/\b(knocked out|tooth fell out|tooth came out)\b/.test(norm)) { emergencyAnswer("knocked-out"); return; }
-  if (/\b(broke|broken|chipped|cracked)\b/.test(norm) && /\btooth|teeth\b/.test(norm)) { emergencyAnswer("broken-tooth"); return; }
-
+  for (const u of CONFIG.urgentMenu){
+    if (u.pattern && new RegExp(u.pattern, "i").test(text)){ urgentAnswer(u.id); return; }
+  }
   const res = getAnswer(text, KB);
   for (const a of res.answers) botSay(a);
   const id = res.ids[0];
-  if (id === "fallback" || id === "spanish"){
+  if (id === "greeting"){ mainQuick(); return; }
+  if (id === "fallback" || (CONFIG.messageOfferIds || []).includes(id)){
     pendingOffer = "message"; pendingOfferText = text;
     setQuickButtons([
       { label: "📝 Yes, take a message", action: () => { pendingOffer = null; startLead("message", text); } },
-      { label: "↩️ No thanks", action: () => { pendingOffer = null; botSay("No problem — what else can I help with?"); mainQuick(); } }
+      ...CONFIG.quickReplies.map(q => ({ label: q.label, action: () => { pendingOffer = null; quickAction(q); } }))
     ]);
     return;
   }
-  if (id === "book" || id === "new-patients" || id === "whitening" || id === "same-day"){
+  if (id === "book" || (CONFIG.bookOfferIds || []).includes(id)){
     pendingOffer = "book";
     setQuickButtons([
       { label: "📅 Yes, let's book", action: () => { pendingOffer = null; startLead("booking"); } },
@@ -690,9 +552,9 @@ function handleUserText(text){
     ]);
     return;
   }
-  if (["toothache","broken-tooth","knocked-out","after-hours-pain"].includes(id)){
+  if (CONFIG.urgentIds.includes(id)){
     setQuickButtons([
-      { label: "📝 Take my details", action: () => startLead("emergency") },
+      { label: "📝 Take my details", action: () => startLead("urgent") },
       { label: "↩️ Back to main menu", action: () => { botSay("Of course — what else can I do for you?"); mainQuick(); } }
     ]);
     return;
@@ -708,17 +570,13 @@ function handleUserText(text){
   }
   afterAnswer();
 }
-let pendingOfferText = null;
-
-/* ---------- Owner panel (leads) ---------- */
-const LEAD_KEY = "mgd_demo_leads";
 function loadLeads(){
-  try { return JSON.parse(localStorage.getItem(LEAD_KEY) || "[]"); } catch(e){ return []; }
+  try { return JSON.parse(localStorage.getItem(CONFIG.leadKey) || "[]"); } catch(e){ return []; }
 }
 function saveLead(lead){
   const leads = loadLeads();
   leads.unshift(lead);
-  try { localStorage.setItem(LEAD_KEY, JSON.stringify(leads)); } catch(e){}
+  try { localStorage.setItem(CONFIG.leadKey, JSON.stringify(leads)); } catch(e){}
   renderLeads();
   const dot = document.getElementById("bubbleDot");
   if (dot) dot.style.display = "block";
@@ -741,16 +599,10 @@ function renderLeads(){
     d.querySelector("strong").textContent = "🧾 " + l.name;
     d.querySelector(".phone").textContent = l.phone;
     d.querySelector(".need").textContent = "Needs: " + l.need;
-    d.querySelector(".when").textContent = whenStr + (l.afterHours ? " · 🌙 captured after hours" : "") + (l.reason === "message" ? " · message for Jess" : l.reason === "emergency" ? " · 🚨 emergency" : " · booking request");
+    d.querySelector(".when").textContent = whenStr + (l.afterHours ? " · 🌙 captured after hours" : "") + (l.reason === "message" ? " · message for " + CONFIG.contactName : l.reason === "urgent" ? " · 🚨 urgent" : " · booking request");
     list.appendChild(d);
   }
 }
-document.getElementById("clearLeads").addEventListener("click", () => {
-  try { localStorage.removeItem(LEAD_KEY); } catch(e){}
-  renderLeads();
-});
-
-/* ---------- Status pill + hours table highlight ---------- */
 function refreshStatus(){
   const pill = document.getElementById("statusPill");
   const sub = document.getElementById("chatSub");
@@ -768,60 +620,57 @@ function refreshStatus(){
     tr.classList.toggle("today-row", Number(tr.dataset.day) === now.getDay());
   });
 }
-
-/* ---------- Widget open/close + greeting ---------- */
-const panel = document.getElementById("chatPanel");
-const bubble = document.getElementById("chatBubble");
 function greet(){
-  botSay(isOpenNow() ? GREETING_OPEN : greetingClosed());
+  botSay(isOpenNow() ? greetingOpen() : greetingClosed());
   mainQuick();
   greeted = true;
 }
 function openChat(mode){
+  const panel = document.getElementById("chatPanel");
   panel.classList.add("open");
   document.getElementById("bubbleDot").style.display = "none";
   if (!greeted) greet();
-  if (mode === "book" && greeted && !leadFlow){
-    if (msgsEl.children.length <= 2 || mode === "book") { /* fallthrough below */ }
-  }
-  if (mode === "book" && !leadFlow){
-    // If the greeting was just posted, start booking right away.
-    startLead("booking");
-  }
+  if (mode === "book" && !leadFlow) startLead("booking");
   setTimeout(() => inputEl.focus(), 60);
 }
-bubble.addEventListener("click", () => {
-  if (panel.classList.contains("open")) panel.classList.remove("open");
-  else openChat("chat");
-});
-document.querySelectorAll("[data-open-chat]").forEach(el => {
-  el.addEventListener("click", () => openChat(el.dataset.openChat));
-});
-document.getElementById("chatForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const text = inputEl.value.trim();
-  if (!text) return;
-  inputEl.value = "";
-  if (!panel.classList.contains("open")) openChat("chat");
-  handleUserText(text);
-});
-
-/* ---------- After-hours preview toggle ---------- */
-document.getElementById("afterHoursToggle").addEventListener("change", (e) => {
-  forceAfterHours = e.target.checked;
+if (typeof document !== "undefined"){
+  msgsEl = document.getElementById("chatMsgs");
+  quickEl = document.getElementById("quickRow");
+  inputEl = document.getElementById("chatText");
+  document.getElementById("chatBubble").addEventListener("click", () => {
+    const panel = document.getElementById("chatPanel");
+    if (panel.classList.contains("open")) panel.classList.remove("open");
+    else openChat("chat");
+  });
+  document.querySelectorAll("[data-open-chat]").forEach(el => {
+    el.addEventListener("click", () => openChat(el.dataset.openChat));
+  });
+  document.getElementById("chatForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = inputEl.value.trim();
+    if (!text) return;
+    inputEl.value = "";
+    handleUserText(text);
+  });
+  document.getElementById("clearLeads").addEventListener("click", () => {
+    try { localStorage.removeItem(CONFIG.leadKey); } catch(e){}
+    renderLeads();
+  });
+  document.getElementById("afterHoursToggle").addEventListener("change", (e) => {
+    forceAfterHours = e.target.checked;
+    refreshStatus();
+    const panel = document.getElementById("chatPanel");
+    if (panel.classList.contains("open")){
+      addSys(forceAfterHours ? "🌙 After-hours mode preview ON — the assistant now behaves as if the business is closed."
+                             : "☀️ After-hours preview OFF — back to the real clock.");
+      botSay(isOpenNow() ? greetingOpen() : greetingClosed());
+      mainQuick();
+    }
+  });
   refreshStatus();
-  if (panel.classList.contains("open")){
-    addSys(forceAfterHours ? "🌙 After-hours mode preview ON — the assistant now behaves as if the clinic is closed."
-                           : "☀️ After-hours preview OFF — back to the real clock.");
-    botSay(isOpenNow() ? GREETING_OPEN : greetingClosed());
-    mainQuick();
-  }
-});
-
-/* ---------- Init ---------- */
-refreshStatus();
-renderLeads();
-setInterval(refreshStatus, 60000);
+  renderLeads();
+  setInterval(refreshStatus, 60000);
+}
 </script>
 </body>
 </html>
