@@ -76,6 +76,7 @@
   .lead{background:#fff; border:1px solid var(--line); border-left:5px solid var(--main); border-radius:10px;
     padding:12px 14px; margin-top:10px; font-size:.93rem;}
   .lead .when{color:var(--muted); font-size:.8rem;}
+  .lead .ctx{color:#47655a; font-size:.84rem;}
   .lead-empty{color:var(--muted); font-style:italic; margin-top:8px;}
   .clear-btn{background:none; border:1px solid var(--line); color:var(--muted); border-radius:999px;
     padding:5px 12px; font-size:.8rem; cursor:pointer; margin-top:12px;}
@@ -103,6 +104,11 @@
   .msg.bot{background:#fff; border:1px solid var(--line); border-bottom-left-radius:4px; align-self:flex-start;}
   .msg.user{background:var(--main); color:#fff; border-bottom-right-radius:4px; align-self:flex-end;}
   .msg.sys{background:transparent; color:var(--muted); font-size:.78rem; text-align:center; align-self:center; font-style:italic;}
+  .msg.typing{background:#fff; border:1px solid var(--line); border-bottom-left-radius:4px; align-self:flex-start; padding:13px 14px;}
+  .msg.typing span{display:inline-block; width:7px; height:7px; margin-right:3px; border-radius:50%; background:#9db8ad; animation:tblink 1.15s infinite;}
+  .msg.typing span:nth-child(2){animation-delay:.18s;}
+  .msg.typing span:nth-child(3){animation-delay:.36s; margin-right:0;}
+  @keyframes tblink{0%,60%,100%{opacity:.25; transform:translateY(0);}30%{opacity:1; transform:translateY(-2px);}}
   .quick-row{display:flex; flex-wrap:wrap; gap:7px; padding:10px 12px 4px; background:var(--main-light);}
   .quick-row:empty{display:none;}
   .quick{border:1.5px solid var(--main); color:var(--main-dark); background:#fff; border-radius:999px;
@@ -537,9 +543,81 @@ function addMsg(text, who){
   msgsEl.scrollTop = msgsEl.scrollHeight;
   return d;
 }
-function addSys(text){ addMsg(text, "sys"); }
-function botSay(text){ addMsg(text, "bot"); }
+/* Bot replies are delivered through a short "typing" pause — three dots,
+   then the answer — so the chat feels like a person replying, not a
+   vending machine dispensing text. Quick buttons wait until the bot has
+   finished "typing" so they never appear before the words they follow. */
+let sayQueue = [], sayTimer = null, typingEl = null, pendingQuick = null;
+function botSay(text){ sayQueue.push({ text: text, who: "bot" }); pumpSay(); }
+function addSys(text){ sayQueue.push({ text: text, who: "sys" }); pumpSay(); }
+function showTyping(){
+  if (typingEl || !msgsEl) return;
+  typingEl = document.createElement("div");
+  typingEl.className = "msg typing";
+  typingEl.innerHTML = "<span></span><span></span><span></span>";
+  msgsEl.appendChild(typingEl);
+  msgsEl.scrollTop = msgsEl.scrollHeight;
+}
+function hideTyping(){
+  if (typingEl){ typingEl.remove(); typingEl = null; }
+}
+function pumpSay(){
+  if (sayTimer !== null) return;
+  const item = sayQueue[0];
+  if (!item){
+    if (pendingQuick){ const q = pendingQuick; pendingQuick = null; drawQuick(q); }
+    return;
+  }
+  let delay = 140;
+  if (item.who === "bot"){ showTyping(); delay = Math.min(620 + item.text.length * 9, 1900); }
+  sayTimer = setTimeout(() => {
+    sayTimer = null;
+    hideTyping();
+    sayQueue.shift();
+    addMsg(item.text, item.who);
+    pumpSay();
+  }, delay);
+}
+/* Conversation context: what the visitor actually asked about before
+   leaving a lead. It rides along with the lead so the owner calls back
+   informed — knowing the visitor asked about whitening AND has an
+   unanswered dog question — instead of getting the last question cold. */
+let chatLog = [];
+const NON_TOPIC_IDS = { greeting:1, thanks:1, farewell:1, ack:1, oops:1, help:1, decline:1, human:1, "open-now":1, "bot-name":1, services:1, "price-overview":1, fallback:1, frustrated:1 };
+function topicLabel(id){
+  const e = KB.find(x => x.id === id);
+  if (!e || !e.phrases || !e.phrases.length) return id.replace(/-/g, " ");
+  const p = String(e.phrases[0]).replace(/\?+$/, "").trim();
+  return p.charAt(0).toUpperCase() + p.slice(1);
+}
+function noteTopic(id){
+  if (!id || NON_TOPIC_IDS[id]) return;
+  const label = topicLabel(id);
+  if (chatLog.some(e => e.kind === "topic" && e.text === label)) return;
+  chatLog.push({ kind: "topic", text: label });
+  if (chatLog.length > 8) chatLog.shift();
+}
+function noteMissed(text){
+  const t = String(text || "").trim().slice(0, 120);
+  if (!t) return;
+  chatLog.push({ kind: "missed", text: t });
+  if (chatLog.length > 8) chatLog.shift();
+}
+function leadContext(){
+  if (!chatLog.length) return "";
+  const topics = [], missed = [];
+  for (const e of chatLog){ if (e.kind === "topic") topics.push(e.text); else missed.push(e.text); }
+  const parts = [];
+  if (topics.length) parts.push("Asked about: " + topics.join("; "));
+  for (const m of missed) parts.push("Unanswered: “" + m + "”");
+  return parts.join(" · ");
+}
 function setQuickButtons(list){
+  // Hold the buttons until the bot's queued replies have all landed.
+  if (sayTimer !== null || sayQueue.length){ pendingQuick = list; quickEl.innerHTML = ""; return; }
+  drawQuick(list);
+}
+function drawQuick(list){
   quickEl.innerHTML = "";
   for (const b of list){
     const btn = document.createElement("button");
@@ -559,8 +637,8 @@ function quickAction(q){
   else if (q.kind === "services"){ addMsg(q.label, "user"); botSay(CONFIG.servicesSummary); botSay("Want details on any of those — or shall I help you book?"); afterAnswer(); }
   else if (q.kind === "hours"){ addMsg(q.label, "user"); botSay(kbAnswer("hours")); botSay(kbAnswer("location")); afterAnswer(); }
   else if (q.kind === "urgent"){ addMsg(q.label, "user"); urgentMenu(); }
-  else if (q.kind === "kb"){ addMsg(q.label, "user"); botSay(kbAnswer(q.target)); afterAnswer(); }
-  else if (q.kind === "kb_multi"){ addMsg(q.label, "user"); for (const t of q.targets) botSay(kbAnswer(t)); afterAnswer(); }
+  else if (q.kind === "kb"){ addMsg(q.label, "user"); noteTopic(q.target); botSay(kbAnswer(q.target)); afterAnswer(); }
+  else if (q.kind === "kb_multi"){ addMsg(q.label, "user"); for (const t of q.targets){ noteTopic(t); botSay(kbAnswer(t)); } afterAnswer(); }
 }
 function mainQuick(){
   setQuickButtons(CONFIG.quickReplies.map(q => ({ label: q.label, action: () => quickAction(q) })));
@@ -570,6 +648,7 @@ function urgentMenu(){
   setQuickButtons(CONFIG.urgentMenu.map(u => ({ label: u.label, action: () => urgentAnswer(u.id) })));
 }
 function urgentAnswer(id){
+  noteTopic(id);
   botSay(kbAnswer(id));
   if (!isOpenNow()){
     botSay("Since we're closed right now, leave your details and you'll be first in the callback queue when we open " + nextOpeningPhrase() + ".");
@@ -637,7 +716,7 @@ function leadStep(text){
 }
 function finishLead(){
   const lead = { name: leadFlow.name, phone: leadFlow.phone, need: leadFlow.need,
-    reason: leadFlow.reason, afterHours: !isOpenNow(), time: new Date().toISOString() };
+    reason: leadFlow.reason, context: leadContext(), afterHours: !isOpenNow(), time: new Date().toISOString() };
   saveLead(lead);
   const name = leadFlow.name, phone = leadFlow.phone;
   leadFlow = null;
@@ -684,6 +763,7 @@ function handleUserText(text){
     if (u.pattern && new RegExp(u.pattern, "i").test(text)){ urgentAnswer(u.id); return; }
   }
   const res = getAnswer(text, KB);
+  for (const rid of res.ids){ if (rid === "fallback") noteMissed(text); else noteTopic(rid); }
   for (const a of res.answers) botSay(a);
   const id = res.ids[0];
   if (id === "greeting" || id === "thanks" || id === "farewell" || id === "ack" || id === "oops" || id === "help" || id === "decline" || id === "open-now" || id === "bot-name"){ mainQuick(); return; }
@@ -760,6 +840,13 @@ function renderLeads(){
     d.querySelector(".phone").textContent = l.phone;
     d.querySelector(".need").textContent = "Needs: " + l.need;
     d.querySelector(".when").textContent = whenStr + (l.afterHours ? " · 🌙 captured after hours" : "") + (l.reason === "message" ? " · message for " + CONFIG.contactName : l.reason === "urgent" ? " · 🚨 urgent" : " · booking request");
+    if (l.context){
+      d.appendChild(document.createElement("br"));
+      const c = document.createElement("span");
+      c.className = "ctx";
+      c.textContent = "💬 Earlier in chat: " + l.context;
+      d.appendChild(c);
+    }
     list.appendChild(d);
   }
 }
