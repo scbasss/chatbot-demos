@@ -252,9 +252,9 @@
 /* Demo AI receptionist — rule-based intent matching over a fixed knowledge
    base. In a paid client build, the single getAnswer() swap point below is
    where an LLM endpoint would be called instead. */
-const CONFIG = {"name": "Magnolia Grove Dental", "phone": "(386) 555-0147", "contactName": "Jess", "leadKey": "mgd_demo_leads", "hours": {"0": null, "1": [8, 18], "2": [8, 19], "3": [8, 18], "4": [8, 19], "5": [8, 16], "6": null}, "kb": [{"id": "hours", "phrases": ["what are your hours", "your hours", "when are you open", "opening hours", "hours of operation", "evening hours", "how late"], "keywords": ["hours", "open", "close", "closed", "late", "early"], "answer": "We're open Monday, Wednesday 8\u20136; Tuesday and Thursday 8\u20137 for evening appointments; Friday 8\u20134; and Saturday by appointment. We're closed Sundays."}, {"id": "location", "phrases": ["where are you located", "where are you", "your address", "how do i get there", "directions", "parking"], "keywords": ["located", "address", "parking", "directions", "wheelchair", "find you"], "answer": "We're at 1214 Houston Ave in Live Oak, right in town. There's free parking in the lot behind the building, and the entrance is fully wheelchair accessible."}, {"id": "phone", "phrases": ["phone number", "your number", "call you", "contact you"], "keywords": ["phone", "number", "call", "contact", "reach"], "answer": "You can reach the front desk at (386) 555-0147 during business hours \u2014 or just leave your number here and we'll call you."}, {"id": "weekend", "phrases": ["open on weekends", "weekend", "on saturday", "on sunday", "saturdays", "sundays"], "keywords": ["weekend", "saturday", "sunday"], "answer": "Saturdays are by appointment only, and we're closed Sundays. If something comes up over the weekend, leave a message here and you'll be first in our callback queue Monday morning."}, {"id": "cleaning-price", "phrases": ["how much is a cleaning", "cost of a cleaning", "cleaning cost", "cleaning price", "price of a cleaning"], "keywords": ["cleaning", "cleanings"], "answer": "A routine cleaning with exam starts at $99 for new patients. If it's been a while or you need a deeper cleaning, the dentist will quote it honestly before any work starts \u2014 no surprises."}, {"id": "exam-price", "phrases": ["exam and x-rays", "exam and x rays", "new patient exam", "how much is an exam", "x-rays", "x rays", "xray"], "keywords": ["exam", "xray", "x-ray", "x-rays", "checkup"], "answer": "Our new-patient exam with digital X-rays starts at $79. It's the best place to start if you're new or have a tooth that's bothering you."}, {"id": "filling-price", "phrases": ["how much does a filling cost", "filling cost", "how much is a filling", "fillings cost"], "keywords": ["filling", "fillings", "cavity"], "answer": "Fillings start at $150 depending on the tooth and size. After your exam, Dr. Ruiz will give you an exact price before treatment \u2014 we always quote first."}, {"id": "crown-price", "phrases": ["how much is a crown", "crown cost", "cost of a crown", "crowns cost"], "keywords": ["crown", "crowns"], "answer": "Crowns start at $950. We offer payment plans on larger treatments, so just ask and we'll walk you through options."}, {"id": "root-canal", "phrases": ["root canal", "root canals", "do you do root"], "keywords": ["root", "canal", "canals"], "answer": "Yes, Dr. Bell handles most root canals right here in the office, starting at $750. If your case needs a specialist, we'll refer you and help coordinate it."}, {"id": "whitening", "phrases": ["teeth whitening", "whitening", "whiten my teeth", "bleaching"], "keywords": ["whitening", "whiten", "bleach"], "answer": "We do! Professional whitening starts at $299, and it's much gentler on sensitive teeth than store kits. Want me to help you book a whitening consult?"}, {"id": "invisalign", "phrases": ["invisalign", "clear aligners", "aligners", "straighten"], "keywords": ["invisalign", "aligners", "braces", "straighten"], "answer": "Yes \u2014 Invisalign clear aligners start at $3,200 with payment plans available. The first step is a free consult to check you're a good candidate."}, {"id": "dentures", "phrases": ["dentures", "denture", "partials", "partial denture"], "keywords": ["denture", "dentures", "partials"], "answer": "We do full and partial dentures, starting at $1,100. Dr. Ruiz takes extra time on fit \u2014 most patients need a couple of short visits."}, {"id": "kids", "phrases": ["see kids", "see children", "children", "kids", "child", "my son", "my daughter", "pediatric"], "keywords": ["kids", "children", "child", "son", "daughter"], "answer": "Absolutely \u2014 we see children ages 4 and up, and Tammy, our hygienist, is famous for making nervous little ones comfortable. Kids' cleanings start at $69."}, {"id": "book", "phrases": ["how do i book", "how to book", "book an appointment", "make an appointment", "schedule an appointment", "how do i schedule"], "keywords": ["book", "booking", "appointment", "schedule", "appointments"], "answer": "Easy \u2014 just tell me your name, your phone number, and what you need, and our front desk will call you to confirm a time. Want to do that now?"}, {"id": "same-day", "phrases": ["same-day", "same day", "today", "urgent appointment", "get in today", "asap"], "keywords": ["today", "urgent", "asap"], "answer": "We hold a few same-day slots every morning for urgent problems \u2014 they go fast. Leave your details here and you'll be first to hear if one's open."}, {"id": "reschedule", "phrases": ["reschedule", "cancel", "change my appointment", "move my appointment"], "keywords": ["reschedule", "cancel", "change"], "answer": "No problem \u2014 call us at (386) 555-0147, or leave a message here with your new preferred time and we'll sort it out. We just ask for 24 hours' notice when you can."}, {"id": "first-visit", "phrases": ["first visit", "bring to", "what should i bring", "new patient form", "first appointment"], "keywords": ["bring", "first", "visit", "form"], "answer": "Just a photo ID and your insurance card if you have one. Arrive about 10 minutes early for a short new-patient form \u2014 or I can take your details right here to save time."}, {"id": "cleaning-length", "phrases": ["how long does a cleaning take", "how long is a cleaning", "long does it take", "cleaning take"], "keywords": ["long", "take", "duration"], "answer": "Most cleanings take about 45 minutes to an hour. If you come on a lunch break, let us know and we'll keep you on schedule."}, {"id": "insurance", "phrases": ["do you take my insurance", "take insurance", "accept insurance", "my insurance", "insurance plan", "ppo", "do you take"], "keywords": ["insurance", "ppo", "coverage", "insurer", "delta", "cigna", "metlife", "guardian", "aetna"], "answer": "We work with most major dental PPO plans. Every plan is a little different, so the surest way is to leave your insurer's name and we'll verify your coverage before your visit \u2014 no obligation."}, {"id": "no-insurance", "phrases": ["don't have insurance", "do not have insurance", "no insurance", "without insurance", "uninsured", "savings plan"], "keywords": ["uninsured", "savings"], "answer": "Of course \u2014 plenty of our patients don't. Our new-patient exam starts at $79, and we have an in-house savings plan that takes 15% off most treatments for members."}, {"id": "payment-plans", "phrases": ["payment plan", "payment plans", "pay monthly", "monthly payments", "financing", "split the cost"], "keywords": ["payment", "payments", "monthly", "financing", "finance"], "answer": "Yes, on treatments like crowns, root canals, and Invisalign we can split the cost into monthly payments. Jess at the front desk will lay out the options before anything is scheduled."}, {"id": "payment-forms", "phrases": ["forms of payment", "how can i pay", "credit card", "debit", "hsa", "fsa", "checks", "accept payment"], "keywords": ["pay", "card", "cards", "hsa", "fsa", "check", "checks", "cash"], "answer": "Cash, all major credit and debit cards, and most HSA/FSA cards. We don't accept personal checks for first visits."}, {"id": "toothache", "phrases": ["toothache", "tooth ache", "tooth hurts", "tooth pain", "my tooth", "hurting tooth", "aching"], "keywords": ["toothache", "ache", "hurts", "hurt", "pain", "aching"], "answer": "I'm sorry you're hurting. We hold same-day emergency slots every morning \u2014 leave your name and number now and the team will call you as soon as we open. Meanwhile, an over-the-counter pain reliever as directed and a cold compress can help."}, {"id": "broken-tooth", "phrases": ["broke a tooth", "broken tooth", "chipped", "cracked tooth", "broke my tooth", "chip"], "keywords": ["broke", "broken", "chipped", "cracked", "chip"], "answer": "Don't panic \u2014 save any pieces if you can, rinse gently with warm water, and get in touch right away. Broken teeth are exactly what our morning emergency slots are for, so leave your details and we'll call first thing."}, {"id": "knocked-out", "phrases": ["knocked out", "knocked my tooth", "tooth fell out", "tooth came out", "lost a tooth"], "keywords": ["knocked", "fell out", "came out"], "answer": "This one's time-sensitive: pick the tooth up by the crown (not the root), rinse it briefly without scrubbing, and if you can, place it back in the socket \u2014 or keep it in milk. Then call us immediately at (386) 555-0147; if we're closed, head to urgent care or the ER and leave a message here too."}, {"id": "after-hours-pain", "phrases": ["after hours", "in pain", "severe pain", "swelling", "can't sleep", "cant sleep"], "keywords": ["pain", "swelling", "fever", "emergency"], "answer": "I'm so sorry \u2014 the office is closed right now, but leave your name, number, and what's going on, and you'll be the first call when we open at [NEXT_OPENING]. If you have swelling that's spreading, trouble breathing or swallowing, or a fever with tooth pain, please go to the ER tonight rather than waiting."}, {"id": "dentists", "phrases": ["who are the dentists", "the dentists", "dr ruiz", "dr bell", "your dentists", "who is the dentist"], "keywords": ["dentist", "dentists", "ruiz", "bell", "doctor"], "answer": "Dr. Elena Ruiz founded Magnolia Grove and handles general and family dentistry; Dr. Marcus Bell focuses on crowns, implants, and root canals. Patients love that they explain everything in plain English before starting."}, {"id": "nervous", "phrases": ["nervous", "scared", "afraid", "anxious", "anxiety", "fear", "dental anxiety"], "keywords": ["nervous", "scared", "afraid", "anxious", "anxiety", "fear"], "answer": "You're not alone \u2014 that's one of the most common things we hear. The team goes at your pace, explains each step, and can take breaks whenever you need. Mention it when you book and we'll note it on your appointment."}, {"id": "new-patients", "phrases": ["accepting new patients", "new patients", "taking new", "accept new"], "keywords": ["new", "patients", "accepting"], "answer": "Yes, we're glad to be! New-patient exams start at $79 including X-rays. Want me to help you get set up?"}, {"id": "spanish", "phrases": ["spanish", "espa\u00f1ol", "espanol", "habla", "speak spanish"], "keywords": ["spanish", "espanol", "espa\u00f1ol"], "answer": "That's a great question \u2014 I don't want to guess on that one. I can take a message and have Jess call you back with the answer, or you can reach us at (386) 555-0147. Want me to take a message?"}], "quickReplies": [{"label": "\ud83d\udcc5 Book an appointment", "kind": "book"}, {"label": "\ud83d\udd50 Hours & location", "kind": "hours"}, {"label": "\ud83e\uddb7 Services & prices", "kind": "services"}, {"label": "\ud83d\udcb3 Insurance & payment", "kind": "kb_multi", "targets": ["insurance", "payment-plans"]}, {"label": "\ud83d\udea8 I have a dental emergency", "kind": "urgent"}], "urgentMenu": [{"label": "\ud83d\ude23 Toothache", "id": "toothache"}, {"label": "\ud83e\uddb7 Broken / chipped tooth", "id": "broken-tooth", "pattern": "(broke|broken|chipped|cracked)[^.!?]{0,40}(tooth|teeth)|(tooth|teeth)[^.!?]{0,40}(broke|broken|chipped|cracked)"}, {"label": "\u203c\ufe0f Knocked-out tooth", "id": "knocked-out", "pattern": "knocked out|tooth fell out|tooth came out"}, {"label": "\ud83c\udf19 Pain after hours", "id": "after-hours-pain"}], "urgentIds": ["toothache", "broken-tooth", "knocked-out", "after-hours-pain"], "bookOfferIds": ["book", "new-patients", "whitening", "same-day"], "servicesSummary": "Here's what we do, with honest starting-at pricing: cleanings from $99 \u00b7 new-patient exam + X-rays from $79 \u00b7 fillings from $150 \u00b7 crowns from $950 \u00b7 root canals from $750 \u00b7 whitening from $299 \u00b7 Invisalign from $3,200 \u00b7 dentures from $1,100 \u00b7 kids' cleanings from $69. We also do extractions and same-day emergency care.", "greetingHint": "I can answer questions about hours, services, and prices, or help you book a visit. What can I do for you?", "urgentIntro": "I'm sorry you're dealing with that \u2014 let's get you the right guidance fast. What's going on?", "messageOfferIds": ["spanish"]};
+const CONFIG = {"name": "Magnolia Grove Dental", "phone": "(386) 555-0147", "contactName": "Jess", "leadKey": "mgd_demo_leads", "hours": {"0": null, "1": [8, 18], "2": [8, 19], "3": [8, 18], "4": [8, 19], "5": [8, 16], "6": null}, "kb": [{"id": "hours", "phrases": ["what are your hours", "your hours", "when are you open", "opening hours", "hours of operation", "evening hours", "how late"], "keywords": ["hours", "open", "close", "closed", "late", "early"], "answer": "We're open Monday, Wednesday 8\u20136; Tuesday and Thursday 8\u20137 for evening appointments; Friday 8\u20134; and Saturday by appointment. We're closed Sundays."}, {"id": "location", "phrases": ["where are you located", "where are you", "your address", "how do i get there", "directions", "parking"], "keywords": ["located", "address", "parking", "directions", "wheelchair", "find you"], "answer": "We're at 1214 Houston Ave in Live Oak, right in town. There's free parking in the lot behind the building, and the entrance is fully wheelchair accessible."}, {"id": "phone", "phrases": ["phone number", "your number", "call you", "contact you"], "keywords": ["phone", "number", "call", "contact", "reach"], "answer": "You can reach the front desk at (386) 555-0147 during business hours \u2014 or just leave your number here and we'll call you."}, {"id": "weekend", "phrases": ["open on weekends", "weekend", "on saturday", "on sunday", "saturdays", "sundays"], "keywords": ["weekend", "saturday", "sunday"], "answer": "Saturdays are by appointment only, and we're closed Sundays. If something comes up over the weekend, leave a message here and you'll be first in our callback queue Monday morning."}, {"id": "cleaning-price", "phrases": ["how much is a cleaning", "cost of a cleaning", "cleaning cost", "cleaning price", "price of a cleaning"], "keywords": ["cleaning", "cleanings"], "answer": "A routine cleaning with exam starts at $99 for new patients. If it's been a while or you need a deeper cleaning, the dentist will quote it honestly before any work starts \u2014 no surprises."}, {"id": "exam-price", "phrases": ["exam and x-rays", "exam and x rays", "new patient exam", "how much is an exam", "x-rays", "x rays", "xray"], "keywords": ["exam", "xray", "x-ray", "x-rays", "checkup"], "answer": "Our new-patient exam with digital X-rays starts at $79. It's the best place to start if you're new or have a tooth that's bothering you."}, {"id": "filling-price", "phrases": ["how much does a filling cost", "filling cost", "how much is a filling", "fillings cost"], "keywords": ["filling", "fillings", "cavity"], "answer": "Fillings start at $150 depending on the tooth and size. After your exam, Dr. Ruiz will give you an exact price before treatment \u2014 we always quote first."}, {"id": "crown-price", "phrases": ["how much is a crown", "crown cost", "cost of a crown", "crowns cost"], "keywords": ["crown", "crowns"], "answer": "Crowns start at $950. We offer payment plans on larger treatments, so just ask and we'll walk you through options."}, {"id": "root-canal", "phrases": ["root canal", "root canals", "do you do root"], "keywords": ["root", "canal", "canals"], "answer": "Yes, Dr. Bell handles most root canals right here in the office, starting at $750. If your case needs a specialist, we'll refer you and help coordinate it."}, {"id": "whitening", "phrases": ["teeth whitening", "whitening", "whiten my teeth", "bleaching"], "keywords": ["whitening", "whiten", "bleach"], "answer": "We do! Professional whitening starts at $299, and it's much gentler on sensitive teeth than store kits. Want me to help you book a whitening consult?"}, {"id": "invisalign", "phrases": ["invisalign", "clear aligners", "aligners", "straighten"], "keywords": ["invisalign", "aligners", "braces", "straighten"], "answer": "Yes \u2014 Invisalign clear aligners start at $3,200 with payment plans available. The first step is a free consult to check you're a good candidate."}, {"id": "dentures", "phrases": ["dentures", "denture", "partials", "partial denture"], "keywords": ["denture", "dentures", "partials"], "answer": "We do full and partial dentures, starting at $1,100. Dr. Ruiz takes extra time on fit \u2014 most patients need a couple of short visits."}, {"id": "kids", "phrases": ["see kids", "see children", "children", "kids", "child", "my son", "my daughter", "pediatric"], "keywords": ["kids", "children", "child", "son", "daughter"], "answer": "Absolutely \u2014 we see children ages 4 and up, and Tammy, our hygienist, is famous for making nervous little ones comfortable. Kids' cleanings start at $69."}, {"id": "book", "phrases": ["how do i book", "how to book", "book an appointment", "make an appointment", "schedule an appointment", "how do i schedule"], "keywords": ["book", "booking", "appointment", "schedule", "appointments"], "answer": "Easy \u2014 just tell me your name, your phone number, and what you need, and our front desk will call you to confirm a time. Want to do that now?"}, {"id": "same-day", "phrases": ["same-day", "same day", "today", "urgent appointment", "get in today", "asap"], "keywords": ["today", "urgent", "asap"], "answer": "We hold a few same-day slots every morning for urgent problems \u2014 they go fast. Leave your details here and you'll be first to hear if one's open."}, {"id": "reschedule", "phrases": ["reschedule", "cancel", "change my appointment", "move my appointment"], "keywords": ["reschedule", "cancel", "change"], "answer": "No problem \u2014 call us at (386) 555-0147, or leave a message here with your new preferred time and we'll sort it out. We just ask for 24 hours' notice when you can."}, {"id": "first-visit", "phrases": ["first visit", "bring to", "what should i bring", "new patient form", "first appointment"], "keywords": ["bring", "first", "visit", "form"], "answer": "Just a photo ID and your insurance card if you have one. Arrive about 10 minutes early for a short new-patient form \u2014 or I can take your details right here to save time."}, {"id": "cleaning-length", "phrases": ["how long does a cleaning take", "how long is a cleaning", "long does it take", "cleaning take"], "keywords": ["long", "take", "duration"], "answer": "Most cleanings take about 45 minutes to an hour. If you come on a lunch break, let us know and we'll keep you on schedule."}, {"id": "insurance", "phrases": ["do you take my insurance", "take insurance", "accept insurance", "my insurance", "insurance plan", "ppo", "do you take"], "keywords": ["insurance", "ppo", "coverage", "insurer", "delta", "cigna", "metlife", "guardian", "aetna"], "answer": "We work with most major dental PPO plans. Every plan is a little different, so the surest way is to leave your insurer's name and we'll verify your coverage before your visit \u2014 no obligation."}, {"id": "no-insurance", "phrases": ["don't have insurance", "do not have insurance", "no insurance", "without insurance", "uninsured", "savings plan"], "keywords": ["uninsured", "savings"], "answer": "Of course \u2014 plenty of our patients don't. Our new-patient exam starts at $79, and we have an in-house savings plan that takes 15% off most treatments for members."}, {"id": "payment-plans", "phrases": ["payment plan", "payment plans", "pay monthly", "monthly payments", "financing", "split the cost"], "keywords": ["payment", "payments", "monthly", "financing", "finance"], "answer": "Yes, on treatments like crowns, root canals, and Invisalign we can split the cost into monthly payments. Jess at the front desk will lay out the options before anything is scheduled."}, {"id": "payment-forms", "phrases": ["forms of payment", "how can i pay", "credit card", "debit", "hsa", "fsa", "checks", "accept payment"], "keywords": ["pay", "card", "cards", "hsa", "fsa", "check", "checks", "cash"], "answer": "Cash, all major credit and debit cards, and most HSA/FSA cards. We don't accept personal checks for first visits."}, {"id": "toothache", "phrases": ["toothache", "tooth ache", "tooth hurts", "tooth pain", "my tooth", "hurting tooth", "aching"], "keywords": ["toothache", "ache", "hurts", "hurt", "pain", "aching"], "answer": "I'm sorry you're hurting. We hold same-day emergency slots every morning \u2014 leave your name and number now and the team will call you as soon as we open. Meanwhile, an over-the-counter pain reliever as directed and a cold compress can help."}, {"id": "broken-tooth", "phrases": ["broke a tooth", "broken tooth", "chipped", "cracked tooth", "broke my tooth", "chip"], "keywords": ["broke", "broken", "chipped", "cracked", "chip"], "answer": "Don't panic \u2014 save any pieces if you can, rinse gently with warm water, and get in touch right away. Broken teeth are exactly what our morning emergency slots are for, so leave your details and we'll call first thing."}, {"id": "knocked-out", "phrases": ["knocked out", "knocked my tooth", "tooth fell out", "tooth came out", "lost a tooth"], "keywords": ["knocked", "fell out", "came out"], "answer": "This one's time-sensitive: pick the tooth up by the crown (not the root), rinse it briefly without scrubbing, and if you can, place it back in the socket \u2014 or keep it in milk. Then call us immediately at (386) 555-0147; if we're closed, head to urgent care or the ER and leave a message here too."}, {"id": "after-hours-pain", "phrases": ["after hours", "in pain", "severe pain", "swelling", "can't sleep", "cant sleep"], "keywords": ["pain", "swelling", "fever", "emergency"], "answer": "I'm so sorry \u2014 the office is closed right now, but leave your name, number, and what's going on, and you'll be the first call when we open at [NEXT_OPENING]. If you have swelling that's spreading, trouble breathing or swallowing, or a fever with tooth pain, please go to the ER tonight rather than waiting."}, {"id": "dentists", "phrases": ["who are the dentists", "the dentists", "dr ruiz", "dr bell", "your dentists", "who is the dentist"], "keywords": ["dentist", "dentists", "ruiz", "bell", "doctor"], "answer": "Dr. Elena Ruiz founded Magnolia Grove and handles general and family dentistry; Dr. Marcus Bell focuses on crowns, implants, and root canals. Patients love that they explain everything in plain English before starting."}, {"id": "nervous", "phrases": ["nervous", "scared", "afraid", "anxious", "anxiety", "fear", "dental anxiety"], "keywords": ["nervous", "scared", "afraid", "anxious", "anxiety", "fear"], "answer": "You're not alone \u2014 that's one of the most common things we hear. The team goes at your pace, explains each step, and can take breaks whenever you need. Mention it when you book and we'll note it on your appointment."}, {"id": "new-patients", "phrases": ["accepting new patients", "new patients", "taking new", "accept new"], "keywords": ["new", "patients", "accepting"], "answer": "Yes, we're glad to be! New-patient exams start at $79 including X-rays. Want me to help you get set up?"}, {"id": "spanish", "phrases": ["spanish", "espa\u00f1ol", "espanol", "habla", "speak spanish"], "keywords": ["spanish", "espanol", "espa\u00f1ol"], "answer": "That's a great question \u2014 I don't want to guess on that one. I can take a message and have Jess call you back with the answer, or you can reach us at (386) 555-0147. Want me to take a message?"}], "quickReplies": [{"label": "\ud83d\udcc5 Book an appointment", "kind": "book"}, {"label": "\ud83d\udd50 Hours & location", "kind": "hours"}, {"label": "\ud83e\uddb7 Services & prices", "kind": "services"}, {"label": "\ud83d\udcb3 Insurance & payment", "kind": "kb_multi", "targets": ["insurance", "payment-plans"]}, {"label": "\ud83d\udea8 I have a dental emergency", "kind": "urgent"}], "urgentMenu": [{"label": "\ud83d\ude23 Toothache", "id": "toothache"}, {"label": "\ud83e\uddb7 Broken / chipped tooth", "id": "broken-tooth", "pattern": "(broke|broken|chipped|cracked)[^.!?]{0,40}(tooth|teeth)|(tooth|teeth)[^.!?]{0,40}(broke|broken|chipped|cracked)"}, {"label": "\u203c\ufe0f Knocked-out tooth", "id": "knocked-out", "pattern": "knocked out|tooth fell out|tooth came out"}, {"label": "\ud83c\udf19 Pain after hours", "id": "after-hours-pain"}], "urgentIds": ["toothache", "broken-tooth", "knocked-out", "after-hours-pain"], "bookOfferIds": ["book", "new-patients", "whitening", "same-day"], "servicesSummary": "Here's what we do, with honest starting-at pricing: cleanings from $99 \u00b7 new-patient exam + X-rays from $79 \u00b7 fillings from $150 \u00b7 crowns from $950 \u00b7 root canals from $750 \u00b7 whitening from $299 \u00b7 Invisalign from $3,200 \u00b7 dentures from $1,100 \u00b7 kids' cleanings from $69. We also do extractions and same-day emergency care.", "greetingHint": "I can answer questions about hours, services, and prices, or help you book a visit. What can I do for you?", "urgentIntro": "I'm sorry you're dealing with that \u2014 let's get you the right guidance fast. What's going on?", "messageOfferIds": ["spanish"], "team": [{"initials": "ER", "name": "Dr. Elena Ruiz, DDS", "role": "Owner & general dentist. Founded Magnolia Grove and believes every treatment should be explained in plain English first."}, {"initials": "MB", "name": "Dr. Marcus Bell, DMD", "role": "Associate dentist focusing on implants, crowns, and root canals \u2014 the steady hand for bigger work."}, {"initials": "TC", "name": "Tammy Collins, RDH", "role": "Our hygienist, famous around town for making nervous patients \u2014 especially kids \u2014 completely comfortable."}, {"initials": "JP", "name": "Jess Parker", "role": "Office manager and the voice of our front desk. Jess personally follows up on every message the chat assistant takes."}]};
 const HOURS = CONFIG.hours;   // JS getDay(): 0 Sun … 6 Sat; null = closed
-const KB = CONFIG.kb;
+const KB = CONFIG.kb.map(e => ({ ...e, phrases: e.phrases.map(p => normalize(p).trim()), keywords: e.keywords.map(k => normalize(k).trim()) }));
 const DAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 let forceAfterHours = false;
 
@@ -303,7 +303,9 @@ function greetingClosed(){
   return "Hi! " + CONFIG.name + " is closed right now — we reopen " + nextOpeningPhrase() + ". I'm the after-hours assistant: I can answer quick questions and take messages so the team can call you back when we open.";
 }
 function normalize(text){
-  return " " + text.toLowerCase().replace(/[^a-z0-9áéíóúñ\s]/g, " ").replace(/\s+/g, " ").trim() + " ";
+  let n = " " + text.toLowerCase().replace(/['’]/g, "").replace(/[^a-z0-9áéíóúñ\s]/g, " ").replace(/\s+/g, " ").trim() + " ";
+  n = n.replace(/ u /g, " you ").replace(/ ur /g, " your ").replace(/ r /g, " are ").replace(/ plz /g, " please ").replace(/ pls /g, " please ").replace(/ thx /g, " thanks ");
+  return n.replace(/\s+/g, " ");
 }
 function damerau(a, b){
   const m = a.length, n = b.length, d = [];
@@ -321,36 +323,118 @@ function damerau(a, b){
 // True when a keyword is one small typo away from a word the visitor typed.
 // Same first letter, 4+ letters, 1 edit (2 for long words): catches "whitenig",
 // "apointment", "cleanin" without letting unrelated words match.
-function fuzzyHit(keyword, part){
+function fuzzyHit(keyword, part, exactWords){
   if (keyword.includes(" ") || keyword.length < 4) return false;
   const words = part.split(" ").filter(Boolean);
   const maxDist = keyword.length >= 8 ? 2 : 1;
   for (const w of words){
-    if (w.length < 4 || w[0] !== keyword[0]) continue;
+    if (w.length < 4 || w[0] !== keyword[0] || (exactWords && exactWords.has(w))) continue;
     if (damerau(w, keyword) <= maxDist) return true;
   }
   return false;
 }
 function scoreEntry(entry, part){
   let score = 0;
+  const words = part.split(" ").filter(Boolean);
+  const exactWords = new Set(entry.keywords.filter(k => !k.includes(" ") && words.includes(k)));
   for (const p of entry.phrases){ if (part.includes(" " + p) || part.includes(p + " ") || part.trim() === p) score += 3; }
   for (const k of entry.keywords){
     if (part.includes(" " + k + " ") || part.includes(" " + k)) score += 1;
-    else if (fuzzyHit(k, part)) score += 2;
+    else if (fuzzyHit(k, part, exactWords)) score += 2;
   }
   return score;
 }
 /* The LLM swap point: in a paid build this calls the client endpoint instead. */
+const DAY_TOKENS = {"monday": 1, "mon": 1, "tuesday": 2, "tue": 2, "tues": 2, "wednesday": 3, "wed": 3, "thursday": 4, "thu": 4, "thur": 4, "thurs": 4, "friday": 5, "fri": 5, "saturday": 6, "sat": 6, "saturdays": 6, "sunday": 0, "sun": 0, "sundays": 0, "mondays": 1, "tuesdays": 2, "wednesdays": 3, "thursdays": 4, "fridays": 5};
+// Live open/closed answers computed from CONFIG.hours. Returns null when the
+// knowledge base should answer instead (a day with no walk-in hours, where
+// the weekend/by-appointment answer applies, or a holiday question we have
+// no facts for — those stay honest fallbacks, never invented hours).
+function openAnswer(norm){
+  if (!/\bare you open\b/.test(norm)) return null;
+  if (norm.trim().split(/\s+/).includes("and")) return null;
+  if (/\bweekends?\b/.test(norm)) return null;
+  if (/\b(christmas|thanksgiving|easter|holiday|new year|july)\b/.test(norm)) return null;
+  const tokens = norm.trim().split(/\s+/);
+  let day = null;
+  for (const t of tokens){ if (DAY_TOKENS[t] !== undefined){ day = DAY_TOKENS[t]; break; } }
+  const now = new Date();
+  if (day !== null){
+    const h = HOURS[day];
+    if (!h) return null;
+    return "Yes, we're open " + DAY_NAMES[day] + " " + fmtHour(h[0]) + " – " + fmtHour(h[1]) + ".";
+  }
+  if (/\btomorrow\b/.test(norm)){
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const h = HOURS[d.getDay()];
+    if (!h) return null;
+    return "Yes, we're open tomorrow " + fmtHour(h[0]) + " – " + fmtHour(h[1]) + ".";
+  }
+  // No day named (including bare "are you open") means right now.
+  if (isOpenNow(now)){
+    const h = HOURS[now.getDay()];
+    return "Yes — we're open right now until " + fmtHour(h[1]) + ".";
+  }
+  return "Not right now — we reopen " + nextOpeningPhrase(now) + ".";
+}
 function getAnswer(userText, kb){
   const norm = normalize(userText);
   if (/\b(human|robot|real person|bot|ai|actual person)\b/.test(norm) &&
       /\b(are you|you a|you an|am i talking)\b/.test(norm)) {
     return { answers: [humanText()], ids: ["human"] };
   }
-  const GREETING_WORDS = new Set(["hi","hii","hello","hey","heyy","heyyy","helloo","yo","sup","howdy","hiya","good","morning","afternoon","evening","there","whats","up","how","are","you","doing","folks","everyone"]);
+  const GREETING_WORDS = new Set(["hi","hii","hello","hey","heyy","heyyy","helloo","yo","sup","howdy","hiya","hola","good","morning","afternoon","evening","there","whats","up","how","are","you","doing","folks","everyone"]);
   const tokens = norm.trim().split(/\s+/).filter(Boolean);
   if (tokens.length && tokens.every(t => GREETING_WORDS.has(t))){
     return { answers: [isOpenNow() ? greetingOpen() : greetingClosed()], ids: ["greeting"] };
+  }
+  // Everyday language, answered before the knowledge base so ordinary
+  // messages never hit the fallback: emoji reactions, thanks, farewells,
+  // bare acknowledgments, apologies, help, declines, frustration, discount
+  // questions, staff names, open-now questions, and service/price overviews.
+  if (/👍|🙏/.test(userText)) return { answers: ["Glad to hear it! Anything else I can help with?"], ids: ["ack"] };
+  const THANKS_WORDS = new Set(["thank", "thanks", "thx", "ty", "gracias", "great", "so", "much", "a", "lot"]);
+  if (tokens.length && tokens.every(t => THANKS_WORDS.has(t)) && tokens.some(t => ["thank", "thanks", "thx", "ty", "gracias"].includes(t))){
+    return { answers: ["You're welcome! Anything else I can help with?"], ids: ["thanks"] };
+  }
+  if (/^(bye|goodbye|good bye|see you later|see ya|good night|take care)$/.test(norm.trim())){
+    return { answers: ["Thanks for stopping by — hope to see you soon!"], ids: ["farewell"] };
+  }
+  const ACK_WORDS = new Set(["ok", "okay", "alright", "sure", "got", "it", "gotcha", "cool", "sounds", "good", "perfect", "great", "awesome", "nice", "yes", "yeah", "yep"]);
+  if (tokens.length && tokens.every(t => ACK_WORDS.has(t))){
+    return { answers: ["Got it — anything else I can help with?"], ids: ["ack"] };
+  }
+  if (/^(oops|sorry|my bad|oops sorry)$/.test(norm.trim())){
+    return { answers: ["No worries at all — what can I help with?"], ids: ["oops"] };
+  }
+  if (/^(help|help me|i need help)$/.test(norm.trim())){
+    return { answers: ["Of course — I can answer questions about hours, services, and prices, or help you book. Pick one below, or just ask away."], ids: ["help"] };
+  }
+  if (/^(no|nope|no thanks|no thank you|not interested|i (dont|don t|don't|do not) (want|need))/.test(norm.trim())){
+    return { answers: ["No problem at all. What else can I do for you?"], ids: ["decline"] };
+  }
+  if (/\b(stupid|dumb|useless|sucks|terrible|worst|angry|frustrated|annoying|hate this)\b/.test(norm)){
+    return { answers: ["I'm sorry about that — I'm just the automated assistant, so let me get a person involved. I can take a message for " + CONFIG.contactName + " and they'll follow up personally."], ids: ["frustrated"] };
+  }
+  if (/\b(discount|discounts|coupon|coupons|promo|promotion|voucher)\b/.test(norm)){
+    return { answers: ["I don't have any discounts or coupons in the information I was given — but I can take a message and " + CONFIG.contactName + " can let you know about any current offers."], ids: ["deals"] };
+  }
+  if (CONFIG.team){
+    for (const m of CONFIG.team){
+      const first = m.name.replace(/^Dr\.?\s+/i, "").split(/\s+/)[0].toLowerCase();
+      if (first && norm.includes(" " + first + " ")){
+        return { answers: [m.name + " — " + m.role + " Want me to take a message for them?"], ids: ["staff"] };
+      }
+    }
+  }
+  const openAns = openAnswer(norm);
+  if (openAns) return { answers: [openAns], ids: ["open-now"] };
+  if (/(what time|when) do you (open|close)/.test(norm)){
+    const h = kb.find(e => e.id === "hours");
+    if (h) return { answers: [fillDynamic(h.answer)], ids: ["hours"] };
+  }
+  if (/^(what services|what do you do|what do you offer|services)\b/.test(norm.trim())){
+    return { answers: [CONFIG.servicesSummary, "Want details on any of those — or shall I help you book?"], ids: ["services"] };
   }
   const raw = userText.toLowerCase();
   let parts = raw.split("?").map(s => s.trim()).filter(Boolean);
@@ -372,8 +456,11 @@ function getAnswer(userText, kb){
     if (best && bestScore >= 2 && !seen.has(best.id)){
       seen.add(best.id);
       found.push(best);
-      if (found.length >= 2) break;
+      if (found.length >= 3) break;
     }
+  }
+  if (!found.length && /\b(price|pricing|cost|how much|cheap|expensive)\b/.test(norm)){
+    return { answers: [CONFIG.servicesSummary, "Which service were you wondering about?"], ids: ["price-overview"] };
   }
   if (!found.length) return { answers: [fallbackText()], ids: ["fallback"] };
   return { answers: found.map(e => fillDynamic(e.answer)), ids: found.map(e => e.id) };
@@ -529,13 +616,30 @@ function handleUserText(text){
     startLead("booking");
     return;
   }
+  if (/\b(call me|call me back|have someone call|can you call|ring me|text me)\b/.test(norm)){
+    startLead("message");
+    return;
+  }
+  if (/\b(emergency|urgent|swelling|bleeding|pain|hurts|hurting|hurt)\b/.test(norm)){
+    urgentMenu();
+    return;
+  }
   for (const u of CONFIG.urgentMenu){
     if (u.pattern && new RegExp(u.pattern, "i").test(text)){ urgentAnswer(u.id); return; }
   }
   const res = getAnswer(text, KB);
   for (const a of res.answers) botSay(a);
   const id = res.ids[0];
-  if (id === "greeting"){ mainQuick(); return; }
+  if (id === "greeting" || id === "thanks" || id === "farewell" || id === "ack" || id === "oops" || id === "help" || id === "decline" || id === "open-now"){ mainQuick(); return; }
+  if (id === "services" || id === "price-overview"){ afterAnswer(); return; }
+  if (id === "frustrated" || id === "deals" || id === "staff"){
+    pendingOffer = "message"; pendingOfferText = text;
+    setQuickButtons([
+      { label: "📝 Yes, take a message", action: () => { pendingOffer = null; startLead("message", text); } },
+      ...CONFIG.quickReplies.map(q => ({ label: q.label, action: () => { pendingOffer = null; quickAction(q); } }))
+    ]);
+    return;
+  }
   if (id === "fallback" || (CONFIG.messageOfferIds || []).includes(id)){
     pendingOffer = "message"; pendingOfferText = text;
     setQuickButtons([

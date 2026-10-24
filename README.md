@@ -26,8 +26,11 @@ Inside each file:
 2. **The chat widget** — bottom-right bubble opening a chat panel.
 3. **The knowledge base (KB)** — a list of question/answer pairs in the
    business's own voice. The bot matches typed questions against it with
-   phrase/keyword scoring, answers up to two questions at once, and never
+   phrase/keyword scoring, answers up to three questions at once, and never
    invents an answer it doesn't have (it takes a message instead).
+- **Everyday language** — greetings, thanks, typos, text-speak, open-now
+  questions, and bare urgent words are handled before the knowledge base,
+  so ordinary messages never hit the fallback.
 4. **Lead capture** — a 3-step state machine (name → phone → need). In the
    demo, leads appear in the on-page "What the owner sees" panel.
 5. **Hours engine** — open/closed is computed from the business's hours,
