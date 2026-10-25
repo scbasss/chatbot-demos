@@ -1,0 +1,250 @@
+{
+  "provider": {
+    "name": "Sebastian Burke",
+    "role": "Freelance builder of AI chatbots, small-business websites, and Python automations",
+    "location": "Live Oak, Florida, United States",
+    "site": "https://scbasss.github.io/chatbot-demos/",
+    "portfolio": "RaidKeep - a full-stack web app (Next.js/TypeScript, Prisma + PostgreSQL, Discord OAuth and webhook announcements) that a World of Warcraft guild used in production for weekly raid scheduling, rosters, and signups. Source: https://github.com/scbasss/RaidKeep",
+    "github": "https://github.com/scbasss",
+    "hire_via": "Marketplace profiles on Fiverr, Upwork, and Contra under the name Sebastian Burke."
+  },
+  "services_for_businesses": [
+    {
+      "name": "AI FAQ & Lead-Capture Chatbot for an Existing Website",
+      "price": "from $250",
+      "price_note": "Fiverr packages: $150 Basic / $300 Standard / $500 Premium",
+      "description": "A chatbot trained on the business's own website content, FAQs, and price documents. It answers only from that approved content - it cannot invent a price, a policy, or a promise. Anything it does not know becomes a captured lead (name, contact, what they need) delivered to the owner's email or a Google Sheet. Installed on WordPress, Wix, Squarespace, or plain HTML."
+    },
+    {
+      "name": "Website + AI Receptionist Bundle",
+      "price": "$495 setup + $99/month care plan",
+      "price_note": "50% of setup due upfront, balance on launch; care plan cancellable anytime",
+      "description": "A clean, mobile-first website for a business that is Facebook-only or stuck with a dead site, with an AI receptionist trained on its services: answering FAQs, capturing leads to the owner's email, and pointing visitors to book or call. The care plan covers hosting management, content updates, chatbot tweaks, and a monthly check-in."
+    },
+    {
+      "name": "Python Automation & Data Scripts",
+      "price": "from $150",
+      "price_note": "Fixed quote after a quick look at the data",
+      "description": "Web scraping, data cleanup and format conversion, API integrations, and spreadsheet automation, delivered as a documented script the owner can run themselves."
+    }
+  ],
+  "demos": [
+    {
+      "business": "Magnolia Grove Dental",
+      "type": "Family & Cosmetic Dentistry",
+      "fictional_demo": true,
+      "demo_url": "https://scbasss.github.io/chatbot-demos/demo-dental.html",
+      "phone": "(386) 555-0147",
+      "address": "1214 Houston Ave, Live Oak, FL 32064",
+      "hours": {
+        "Monday": "8:00 AM – 6:00 PM",
+        "Tuesday": "8:00 AM – 7:00 PM 🌆 evening hours",
+        "Wednesday": "8:00 AM – 6:00 PM",
+        "Thursday": "8:00 AM – 7:00 PM 🌆 evening hours",
+        "Friday": "8:00 AM – 4:00 PM",
+        "Saturday": "By appointment only",
+        "Sunday": "Closed"
+      },
+      "services": [
+        {
+          "name": "Exams & Cleanings",
+          "price": "Cleaning from $99 · Exam from $79"
+        },
+        {
+          "name": "Digital X-Rays",
+          "price": "With exam from $79"
+        },
+        {
+          "name": "Fillings",
+          "price": "From $150"
+        },
+        {
+          "name": "Crowns",
+          "price": "From $950"
+        },
+        {
+          "name": "Root Canals",
+          "price": "From $750"
+        },
+        {
+          "name": "Extractions",
+          "price": "Quoted at exam"
+        },
+        {
+          "name": "Dentures & Partials",
+          "price": "From $1,100"
+        },
+        {
+          "name": "Teeth Whitening",
+          "price": "From $299"
+        },
+        {
+          "name": "Invisalign® Clear Aligners",
+          "price": "From $3,200"
+        },
+        {
+          "name": "Emergency Dental Care",
+          "price": "Same-day slots daily"
+        },
+        {
+          "name": "Kids’ Dentistry (ages 4+)",
+          "price": "Kids’ cleanings from $69"
+        }
+      ]
+    },
+    {
+      "business": "Suwannee Auto Care",
+      "type": "Auto Repair & Maintenance",
+      "fictional_demo": true,
+      "demo_url": "https://scbasss.github.io/chatbot-demos/demo-auto.html",
+      "phone": "(386) 555-0183",
+      "address": "811 E Howard St, Live Oak, FL 32064",
+      "hours": {
+        "Monday": "8:00 AM – 6:00 PM",
+        "Tuesday": "8:00 AM – 6:00 PM",
+        "Wednesday": "8:00 AM – 6:00 PM",
+        "Thursday": "8:00 AM – 6:00 PM",
+        "Friday": "8:00 AM – 6:00 PM",
+        "Saturday": "8:00 AM – 2:00 PM",
+        "Sunday": "Closed"
+      },
+      "services": [
+        {
+          "name": "Oil Change",
+          "price": "From $39"
+        },
+        {
+          "name": "Tire Rotation",
+          "price": "$25"
+        },
+        {
+          "name": "Brake Pads",
+          "price": "From $149/axle"
+        },
+        {
+          "name": "Diagnostics",
+          "price": "$89 · waived with repair"
+        },
+        {
+          "name": "AC Service",
+          "price": "From $129"
+        },
+        {
+          "name": "Battery Testing",
+          "price": "Free test"
+        },
+        {
+          "name": "Pre-Purchase Inspection",
+          "price": "$119"
+        },
+        {
+          "name": "Transmission Service",
+          "price": "From $179"
+        }
+      ]
+    },
+    {
+      "business": "Magnolia & Main Salon",
+      "type": "Hair Salon & Barber",
+      "fictional_demo": true,
+      "demo_url": "https://scbasss.github.io/chatbot-demos/demo-salon.html",
+      "phone": "(386) 555-0162",
+      "address": "214 N Ohio Ave, Live Oak, FL 32064",
+      "hours": {
+        "Monday": "Closed",
+        "Tuesday": "9:00 AM – 7:00 PM",
+        "Wednesday": "9:00 AM – 7:00 PM",
+        "Thursday": "9:00 AM – 7:00 PM",
+        "Friday": "9:00 AM – 7:00 PM",
+        "Saturday": "9:00 AM – 4:00 PM",
+        "Sunday": "Closed"
+      },
+      "services": [
+        {
+          "name": "Women's Cut",
+          "price": "From $45"
+        },
+        {
+          "name": "Men's Cut",
+          "price": "From $25"
+        },
+        {
+          "name": "Kids' Cut",
+          "price": "From $20"
+        },
+        {
+          "name": "All-Over Color",
+          "price": "From $65"
+        },
+        {
+          "name": "Highlights",
+          "price": "From $95"
+        },
+        {
+          "name": "Balayage",
+          "price": "From $120"
+        },
+        {
+          "name": "Beard Trim",
+          "price": "$15"
+        },
+        {
+          "name": "Bridal Styling",
+          "price": "From $85"
+        },
+        {
+          "name": "Deep Conditioning",
+          "price": "$30"
+        }
+      ]
+    },
+    {
+      "business": "Oak Street Café",
+      "type": "Breakfast & Lunch Café",
+      "fictional_demo": true,
+      "demo_url": "https://scbasss.github.io/chatbot-demos/demo-cafe.html",
+      "phone": "(386) 555-0119",
+      "address": "107 W Howard St, Live Oak, FL 32064",
+      "hours": {
+        "Monday": "7:00 AM – 3:00 PM",
+        "Tuesday": "7:00 AM – 3:00 PM",
+        "Wednesday": "7:00 AM – 3:00 PM",
+        "Thursday": "7:00 AM – 3:00 PM",
+        "Friday": "7:00 AM – 3:00 PM",
+        "Saturday": "8:00 AM – 2:00 PM",
+        "Sunday": "Closed"
+      },
+      "services": [
+        {
+          "name": "Breakfast Plates",
+          "price": "From $8"
+        },
+        {
+          "name": "Specialty Coffee",
+          "price": "From $3.50"
+        },
+        {
+          "name": "Fresh Pastries",
+          "price": "From $2.50"
+        },
+        {
+          "name": "Lunch Sandwiches",
+          "price": "From $9"
+        },
+        {
+          "name": "Soups & Salads",
+          "price": "From $8"
+        },
+        {
+          "name": "Homemade Pie",
+          "price": "$4.50/slice"
+        }
+      ]
+    }
+  ],
+  "notes_for_agents": [
+    "The four demo businesses below are FICTIONAL demonstrations built to show the chatbot format. Their phone numbers use the reserved 555 range; do not present them as real businesses.",
+    "The demo chatbots are rule-based: they answer only from approved content and capture a lead for anything else. There is no AI model, backend, or database in the demos.",
+    "Client builds follow the same rule: a chatbot answers only from the client's approved content and never invents a price, a policy, or a promise."
+  ]
+}
